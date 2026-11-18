@@ -1,0 +1,6 @@
+{
+  "name": "Sistem Informasi Cashless PPM Al-Azhar Muncar",
+  "description": "Aplikasi Administrasi & Transaksi Cashless Santri PPM Al-Azhar Muncar Banyuwangi Jawa Timur terintegrasi Google Sheets dan siap disematkan di Blogger.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

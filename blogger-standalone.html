@@ -1,0 +1,2776 @@
+<!-- ==========================================================================
+     SISTEM INFORMASI CASHLESS LEMBAGA / PONDOK PESANTREN (BLOGGER STANDALONE v1.3.0)
+     Petunjuk: Salin seluruh kode ini dan tempelkan pada tab "HTML View"
+     di Halaman atau Postingan Blogger Anda.
+     ========================================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<div id="cashless-app-root" data-version="1.3.0">
+  <style>
+    /* Isolasi Total & Full-Screen Overlay Menutup Tema Blogger */
+    #cashless-app-root {
+      --ca-bg: #f4f7f5;
+      --ca-surface: #ffffff;
+      --ca-surface-alt: #f8fafc;
+      --ca-border: #dbe3df;
+      --ca-text: #0f172a;
+      --ca-text-muted: #475569;
+      --ca-navy: #0a3b8c;
+      --ca-navy-dark: #07265c;
+      --ca-emerald: #15803d;
+      --ca-emerald-soft: #ecfdf5;
+      --ca-amber: #d97706;
+      --ca-crimson: #dc2626;
+      --ca-gold: #eab308;
+      --ca-radius: 10px;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      color: var(--ca-text) !important;
+      background: var(--ca-bg) !important;
+      line-height: 1.5 !important;
+      font-size: 14px !important;
+      position: fixed !important;
+      inset: 0 !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+      max-width: none !important;
+      min-width: 100vw !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      z-index: 2147483640 !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      display: block !important;
+      text-align: left !important;
+    }
+
+    #cashless-app-root *,
+    #cashless-app-root *::before,
+    #cashless-app-root *::after {
+      box-sizing: border-box;
+    }
+
+    #cashless-app-root h1,
+    #cashless-app-root h2,
+    #cashless-app-root h3,
+    #cashless-app-root h4,
+    #cashless-app-root p {
+      margin: 0;
+      padding: 0;
+      font-family: inherit;
+      color: inherit;
+    }
+
+    #cashless-app-root button,
+    #cashless-app-root input,
+    #cashless-app-root select,
+    #cashless-app-root textarea {
+      font-family: inherit;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    #cashless-app-root table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+      background: transparent;
+    }
+
+    #cashless-app-root .ca-mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    #cashless-app-root .ca-tabular {
+      font-variant-numeric: tabular-nums;
+    }
+
+    #cashless-app-root .ca-hidden {
+      display: none !important;
+    }
+
+    /* Buttons */
+    #cashless-app-root .ca-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      min-height: 42px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13.5px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    #cashless-app-root .ca-btn:active {
+      transform: translateY(1px);
+    }
+
+    #cashless-app-root .ca-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #cashless-app-root .ca-btn-emerald {
+      background: #16a34a;
+      color: #ffffff;
+    }
+    #cashless-app-root .ca-btn-emerald:hover:not(:disabled) {
+      background: #15803d;
+    }
+
+    #cashless-app-root .ca-btn-navy {
+      background: var(--ca-navy);
+      color: #ffffff;
+    }
+    #cashless-app-root .ca-btn-navy:hover:not(:disabled) {
+      background: var(--ca-navy-dark);
+    }
+
+    #cashless-app-root .ca-btn-crimson {
+      background: #dc2626;
+      color: #ffffff;
+    }
+    #cashless-app-root .ca-btn-crimson:hover:not(:disabled) {
+      background: #b91c1c;
+    }
+
+    #cashless-app-root .ca-btn-outline {
+      background: #ffffff;
+      color: var(--ca-text);
+      border-color: var(--ca-border);
+    }
+    #cashless-app-root .ca-btn-outline:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    #cashless-app-root .ca-btn-sm {
+      min-height: 34px;
+      padding: 6px 12px;
+      font-size: 12.5px;
+    }
+
+    /* Form Controls */
+    #cashless-app-root .ca-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    #cashless-app-root .ca-input,
+    #cashless-app-root .ca-select {
+      width: 100%;
+      min-height: 42px;
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #0f172a;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    #cashless-app-root .ca-input:focus,
+    #cashless-app-root .ca-select:focus {
+      border-color: var(--ca-navy);
+      box-shadow: 0 0 0 3px rgba(10, 59, 140, 0.12);
+    }
+
+    /* ==================== LOGIN SCREEN ==================== */
+    #cashless-app-root .ca-login-wrap {
+      min-height: 100vh;
+      min-height: 100dvh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background: linear-gradient(180deg, #eef4f0 0%, #dcebe1 100%);
+    }
+
+    #cashless-app-root .ca-login-card {
+      width: 100%;
+      max-width: 480px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    #cashless-app-root .ca-login-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff !important;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    #cashless-app-root .ca-login-header h1 {
+      font-size: 16px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.04em;
+      color: #ffffff !important;
+    }
+
+    #cashless-app-root .ca-login-header p {
+      font-size: 12px !important;
+      color: #cbd5e1 !important;
+      margin-top: 2px;
+    }
+
+    #cashless-app-root .ca-login-banner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: linear-gradient(90deg, #ffffff 0%, #e8f1ff 60%, #dbeafe 100%);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    #cashless-app-root .ca-login-banner-title {
+      font-size: 16px !important;
+      font-weight: 800 !important;
+      color: #0b3b8c !important;
+      line-height: 1.2;
+    }
+
+    #cashless-app-root .ca-login-banner-sub {
+      font-size: 12.5px !important;
+      font-weight: 700 !important;
+      color: #0f172a !important;
+      margin-top: 2px;
+    }
+
+
+    #cashless-app-root .ca-login-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    #cashless-app-root .ca-role-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 4px;
+      background: #f1f5f9;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+
+    #cashless-app-root .ca-role-tab {
+      min-height: 36px;
+      border: none;
+      border-radius: 6px;
+      background: transparent;
+      color: #475569;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    #cashless-app-root .ca-role-tab.active {
+      background: #ffffff;
+      color: #0b3b8c;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.1);
+    }
+
+    #cashless-app-root .ca-login-actions {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    #cashless-app-root .ca-login-footer {
+      padding: 12px 20px;
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 11.5px;
+      color: #64748b;
+    }
+
+    /* ==================== DASHBOARD SHELL ==================== */
+    #cashless-app-root .ca-shell {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100dvh;
+      width: 100%;
+      background: #ffffff;
+    }
+
+    /* Top Institutional Menu Bar */
+    #cashless-app-root .ca-menubar {
+      background: #eef2ff;
+      border-bottom: 1px solid #cbd5e1;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 44px;
+      position: relative;
+      z-index: 30;
+    }
+
+    #cashless-app-root .ca-menu-items {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    #cashless-app-root .ca-menu-group {
+      position: relative;
+    }
+
+    #cashless-app-root .ca-menu-trigger {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    #cashless-app-root .ca-menu-trigger:hover,
+    #cashless-app-root .ca-menu-trigger.open {
+      background: #dbeafe;
+      color: #0b3b8c;
+      border-color: #93c5fd;
+    }
+
+    #cashless-app-root .ca-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      min-width: 245px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+      padding: 6px;
+      z-index: 50;
+    }
+
+    #cashless-app-root .ca-dropdown-btn {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      padding: 9px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #0f172a;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    #cashless-app-root .ca-dropdown-btn:hover {
+      background: #eff6ff;
+      color: #0b3b8c;
+    }
+
+    #cashless-app-root .ca-dropdown-divider {
+      height: 1px;
+      background: #e2e8f0;
+      margin: 4px 6px;
+    }
+
+    #cashless-app-root .ca-mobile-nav-btn {
+      display: none;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-weight: 600;
+      font-size: 13px;
+      color: #0f172a;
+      cursor: pointer;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Institutional Gradient Header Banner (Reference Image Inspired) */
+    #cashless-app-root .ca-app-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 20px;
+      background: linear-gradient(90deg, #ffffff 0%, #f1f6ff 28%, #2563eb 64%, #08337a 100%);
+      border-bottom: 2px solid #0a3b8c;
+    }
+
+    #cashless-app-root .ca-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    #cashless-app-root .ca-banner-org {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0b3b8c;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+    }
+
+    #cashless-app-root .ca-banner-loc {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    #cashless-app-root .ca-banner-right {
+      text-align: right;
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    #cashless-app-root .ca-banner-kicker {
+      font-size: 12px;
+      font-style: italic;
+      font-weight: 600;
+      color: #fde047;
+    }
+
+    #cashless-app-root .ca-banner-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      line-height: 1.15;
+    }
+
+    /* Main Content Canvas */
+    #cashless-app-root .ca-main {
+      flex: 1;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbf9 52%, #76b888 100%);
+      padding: 20px;
+      min-height: 500px;
+    }
+
+    /* Home Welcome State */
+    #cashless-app-root .ca-home-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 28px 16px 20px;
+    }
+
+    #cashless-app-root .ca-home-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0b3b8c;
+      margin-top: 14px;
+    }
+
+    #cashless-app-root .ca-home-sub {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 2px;
+    }
+
+    #cashless-app-root .ca-quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      width: 100%;
+      max-width: 920px;
+      margin-top: 28px;
+    }
+
+    #cashless-app-root .ca-quick-tile {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    #cashless-app-root .ca-quick-tile:hover {
+      transform: translateY(-2px);
+      border-color: #0b3b8c;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    #cashless-app-root .ca-quick-tile strong {
+      display: block;
+      font-size: 14px;
+      color: #0f172a;
+      margin-top: 8px;
+    }
+
+    #cashless-app-root .ca-quick-tile span {
+      display: block;
+      font-size: 12px;
+      color: #475569;
+      margin-top: 3px;
+    }
+
+    /* Workspace Module Card */
+    #cashless-app-root .ca-module-card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    #cashless-app-root .ca-module-head {
+      padding: 14px 18px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    #cashless-app-root .ca-module-head h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    #cashless-app-root .ca-module-head p {
+      font-size: 12.5px;
+      color: #64748b;
+    }
+
+    #cashless-app-root .ca-module-body {
+      padding: 18px;
+    }
+
+    /* Two-column POS layout */
+    #cashless-app-root .ca-pos-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    #cashless-app-root .ca-panel {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    #cashless-app-root .ca-santri-summary {
+      border: 1px solid #bfdbfe;
+      background: #f8fbff;
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+
+    #cashless-app-root .ca-stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    #cashless-app-root .ca-stat-cell {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    #cashless-app-root .ca-stat-cell span {
+      display: block;
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    #cashless-app-root .ca-stat-cell strong {
+      display: block;
+      font-size: 15px;
+      margin-top: 2px;
+      color: #0f172a;
+    }
+
+    #cashless-app-root .ca-preset-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    #cashless-app-root .ca-preset-btn {
+      min-height: 36px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+
+    #cashless-app-root .ca-preset-btn:hover {
+      border-color: #0b3b8c;
+      background: #eff6ff;
+      color: #0b3b8c;
+    }
+
+    /* Tables */
+    #cashless-app-root .ca-table-wrap {
+      overflow-x: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    #cashless-app-root .ca-table th {
+      background: #f8fafc;
+      color: #475569;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      white-space: nowrap;
+    }
+
+    #cashless-app-root .ca-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 13px;
+      color: #0f172a;
+      vertical-align: middle;
+    }
+
+    #cashless-app-root .ca-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    #cashless-app-root .ca-text-right {
+      text-align: right !important;
+    }
+
+    /* Semantic State Text (No Hue-Only) */
+    #cashless-app-root .ca-state-ok { color: #15803d; font-weight: 700; }
+    #cashless-app-root .ca-state-warn { color: #b45309; font-weight: 700; }
+    #cashless-app-root .ca-state-err { color: #b91c1c; font-weight: 700; }
+
+    /* Bottom Status Bar */
+    #cashless-app-root .ca-statusbar {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 9px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      font-size: 12px;
+    }
+
+    #cashless-app-root .ca-status-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    #cashless-app-root:fullscreen,
+    #cashless-app-root:-webkit-full-screen {
+      width: 100% !important;
+      height: 100% !important;
+      overflow-y: auto !important;
+      background: var(--ca-bg) !important;
+    }
+
+    #cashless-app-root .ca-btn-fs-active {
+      background: #eff6ff !important;
+      border-color: #0b3b8c !important;
+      color: #0b3b8c !important;
+    }
+
+    #cashless-app-root .ca-btn-footer-fs {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #f1f5f9;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s ease;
+    }
+
+    #cashless-app-root .ca-btn-footer-fs:hover {
+      background: #334155;
+    }
+
+    /* Mobile Drawer */
+    #cashless-app-root .ca-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      z-index: 9998;
+      display: flex;
+    }
+
+    #cashless-app-root .ca-drawer-panel {
+      width: 280px;
+      max-width: 85vw;
+      background: #ffffff;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      overflow-y: auto;
+      box-shadow: 4px 0 24px rgba(15, 23, 42, 0.2);
+    }
+
+    /* Modal & Toast */
+    #cashless-app-root .ca-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.52);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    #cashless-app-root .ca-modal-box {
+      background: #ffffff;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 460px;
+      border: 1px solid #cbd5e1;
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(15, 23, 42, 0.22);
+    }
+
+    #cashless-app-root .ca-toast-wrap {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: 360px;
+    }
+
+    #cashless-app-root .ca-toast {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.25);
+      border-left: 4px solid #22c55e;
+    }
+    #cashless-app-root .ca-toast.error {
+      background: #7f1d1d;
+      border-left-color: #f87171;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 900px) {
+      #cashless-app-root .ca-pos-grid {
+        grid-template-columns: 1fr;
+      }
+      #cashless-app-root .ca-quick-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      #cashless-app-root .ca-menu-items {
+        display: none;
+      }
+      #cashless-app-root .ca-mobile-nav-btn {
+        display: inline-flex;
+      }
+      #cashless-app-root .ca-app-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        background: linear-gradient(135deg, #ffffff 0%, #dbeafe 45%, #0a3b8c 100%);
+      }
+      #cashless-app-root .ca-banner-right {
+        text-align: left;
+      }
+      #cashless-app-root .ca-stat-row {
+        grid-template-columns: 1fr;
+      }
+      #cashless-app-root .ca-main {
+        padding: 12px;
+      }
+      #cashless-app-root .ca-fs-top-label {
+        display: none;
+      }
+    }
+
+    @media print {
+      @page { margin: 2mm; size: auto; }
+      body > *:not(#cashless-app-root) { display: none !important; }
+      #cashless-app-root {
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+        background: #ffffff !important;
+      }
+      body * { visibility: hidden; }
+      #ca-receipt-print,
+      #ca-receipt-print * {
+        visibility: visible !important;
+        color: #000000 !important;
+      }
+      #ca-receipt-print {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin: 0 !important;
+        padding: 4mm 3mm !important;
+        border: none !important;
+        background: #ffffff !important;
+        font-size: 11px !important;
+      }
+      #ca-receipt-print[data-paper="58mm"] { width: 54mm !important; }
+      #ca-receipt-print[data-paper="80mm"] { width: 74mm !important; }
+    }
+  </style>
+
+  <!-- Toast Container -->
+  <div id="ca-toast-wrap" class="ca-toast-wrap"></div>
+
+  <!-- ==================== VIEW 1: LOGIN SISTEM ==================== -->
+  <section id="ca-login-view" class="ca-login-wrap">
+    <div class="ca-login-card">
+      <div class="ca-login-header">
+        <div>
+          <h1>LOGIN SISTEM</h1>
+          <p id="ca-login-subtitle">Aplikasi Sistem Informasi Cashless</p>
+        </div>
+        <span class="ca-mono" style="font-size:11.5px; color:#93c5fd;">v1.3.0</span>
+      </div>
+
+      <div class="ca-login-banner">
+        <div class="ca-logo-slot" data-size="54"></div>
+        <div style="min-width:0;">
+          <div id="ca-login-org-name" class="ca-login-banner-title">PPM AL-AZHAR MUNCAR</div>
+          <div id="ca-login-org-loc" class="ca-login-banner-sub">Banyuwangi Jawa Timur</div>
+          <div id="ca-login-org-phone" style="font-size:11px; color:#475569; margin-top:2px;"></div>
+        </div>
+      </div>
+
+
+      <form id="ca-login-form" class="ca-login-body" autocomplete="off">
+        <div>
+          <span class="ca-label">Jenis Akses / Koneksi</span>
+          <div class="ca-role-tabs">
+            <button type="button" class="ca-role-tab active" data-role="admin">Admin</button>
+            <button type="button" class="ca-role-tab" data-role="kasir">Kasir</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="ca-label" for="ca-login-username">Username Petugas</label>
+          <input id="ca-login-username" class="ca-input" type="text" placeholder="Masukkan username (contoh: admin / kasir)" required />
+        </div>
+
+        <div>
+          <label class="ca-label" for="ca-login-password">Password</label>
+          <div style="position:relative;">
+            <input id="ca-login-password" class="ca-input" type="password" placeholder="Masukkan password" required style="padding-right:64px;" />
+            <button type="button" id="ca-toggle-pass" style="position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; color:#475569; font-size:12px; font-weight:600; cursor:pointer; padding:4px 6px;">Lihat</button>
+          </div>
+        </div>
+
+        <div id="ca-login-error" class="ca-hidden" style="background:#fef2f2; border:1px solid #fecaca; color:#991b1b; padding:10px 12px; border-radius:8px; font-size:12.5px; font-weight:600;"></div>
+
+        <!-- Konfigurasi Endpoint Google Apps Script -->
+        <div style="border:1px solid #e2e8f0; border-radius:8px; padding:10px 12px; background:#f8fafc;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+            <span style="font-size:12px; font-weight:600; color:#334155;">Koneksi: <span id="ca-login-conn-label" style="color:#0b3b8c;">Mode Demo Lokal</span></span>
+            <button type="button" id="ca-toggle-api-box" style="background:none; border:none; color:#0b3b8c; font-size:12px; font-weight:700; cursor:pointer; text-decoration:underline;">Konfigurasi API Sheets</button>
+          </div>
+          <div id="ca-api-config-box" class="ca-hidden" style="margin-top:10px;">
+            <label class="ca-label" for="ca-gas-url-input">URL Web App Google Apps Script (/exec)</label>
+            <input id="ca-gas-url-input" class="ca-input" type="url" placeholder="https://script.google.com/macros/s/.../exec" style="font-size:12px;" />
+            <div style="display:flex; gap:8px; margin-top:8px;">
+              <button type="button" id="ca-save-gas-url" class="ca-btn ca-btn-navy ca-btn-sm">Simpan & Uji Koneksi</button>
+              <button type="button" id="ca-use-demo-mode" class="ca-btn ca-btn-outline ca-btn-sm">Pakai Mode Demo</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ca-login-actions">
+          <button type="submit" id="ca-btn-login" class="ca-btn ca-btn-emerald">
+            <span>&#10004;</span> LOGIN
+          </button>
+          <button type="button" id="ca-btn-reset" class="ca-btn ca-btn-crimson">
+            <span>&#10006;</span> RESET / BATAL
+          </button>
+        </div>
+      </form>
+
+      <div class="ca-login-footer">
+        <span>Sistem transaksi non-tunai santri terintegrasi Google Sheets.</span>
+        <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
+          <button type="button" id="ca-login-fullscreen" class="ca-btn ca-btn-outline ca-btn-sm ca-fs-btn" title="Masuk atau keluar mode layar penuh untuk tablet kasir" aria-pressed="false" style="padding:4px 10px; min-height:28px; font-size:11px;">
+            <span class="ca-fs-icon" aria-hidden="true">&#x26F6;</span>
+            <span class="ca-fs-text">Fullscreen</span>
+          </button>
+          <span class="ca-mono" style="font-weight:700; color:#0f172a; white-space:nowrap;">Version 1.3.0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VIEW 2: DASHBOARD UTAMA ==================== -->
+  <section id="ca-dashboard-view" class="ca-shell ca-hidden">
+    <!-- Top Menu Bar -->
+    <nav class="ca-menubar">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <button type="button" id="ca-mobile-drawer-open" class="ca-mobile-nav-btn">
+          <span>&#9776;</span> Menu
+        </button>
+
+        <div class="ca-menu-items" id="ca-desktop-menu">
+          <div class="ca-menu-group">
+            <button type="button" class="ca-menu-trigger" data-menu="file">File &#9662;</button>
+            <div class="ca-dropdown ca-hidden" id="ca-dd-file">
+              <button type="button" class="ca-dropdown-btn" data-nav="home">0101. Beranda Utama</button>
+              <button type="button" class="ca-dropdown-btn" id="ca-action-sync">0102. Sinkronisasi Data Sheets</button>
+              <div class="ca-dropdown-divider"></div>
+              <button type="button" class="ca-dropdown-btn" id="ca-action-logout" style="color:#b91c1c; font-weight:700;">0199. Logout / Keluar</button>
+            </div>
+          </div>
+
+          <div class="ca-menu-group" id="ca-menu-setup-group">
+            <button type="button" class="ca-menu-trigger" data-menu="setup">Setup &#9662;</button>
+            <div class="ca-dropdown ca-hidden" id="ca-dd-setup">
+              <button type="button" class="ca-dropdown-btn ca-admin-only" data-nav="users">0201. Setup Pengguna</button>
+              <button type="button" class="ca-dropdown-btn ca-admin-only" data-nav="santri">0202. Setup Santri / Kartu RFID</button>
+              <button type="button" class="ca-dropdown-btn ca-admin-only" data-nav="institution">0204. Pengaturan Lembaga &amp; Logo</button>
+              <button type="button" class="ca-dropdown-btn" data-nav="settings">0205. Setup Koneksi API</button>
+              <div class="ca-dropdown-divider ca-admin-only"></div>
+              <button type="button" class="ca-dropdown-btn ca-admin-only" data-nav="logs">0211. Log Sistem</button>
+            </div>
+          </div>
+
+          <div class="ca-menu-group">
+            <button type="button" class="ca-menu-trigger" data-menu="operasional">Operasional &#9662;</button>
+            <div class="ca-dropdown ca-hidden" id="ca-dd-operasional">
+              <button type="button" class="ca-dropdown-btn" data-nav="kasir">0321. Transaksi Kasir / Belanja</button>
+              <button type="button" class="ca-dropdown-btn" data-nav="topup">0322. Top Up Saldo Santri</button>
+              <button type="button" class="ca-dropdown-btn" data-nav="tarik">0323. Tarik Tunai</button>
+              <div class="ca-dropdown-divider"></div>
+              <button type="button" class="ca-dropdown-btn" data-nav="mutasi">0324. Cek Saldo &amp; Mutasi</button>
+            </div>
+          </div>
+
+          <div class="ca-menu-group">
+            <button type="button" class="ca-menu-trigger" data-nav="laporan">Laporan</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:8px;">
+        <button type="button" id="ca-top-fullscreen" class="ca-btn ca-btn-outline ca-btn-sm ca-fs-btn" title="Masuk atau keluar mode layar penuh (tablet kasir)" aria-pressed="false">
+          <span class="ca-fs-icon" aria-hidden="true">&#x26F6;</span>
+          <span class="ca-fs-text ca-fs-top-label">Fullscreen</span>
+        </button>
+        <button type="button" class="ca-btn ca-btn-outline ca-btn-sm" data-nav="kasir">Kasir Cepat</button>
+        <button type="button" id="ca-top-logout" class="ca-btn ca-btn-crimson ca-btn-sm">Logout</button>
+      </div>
+    </nav>
+
+    <!-- Institutional Header Banner -->
+    <header class="ca-app-banner">
+      <div class="ca-banner-left">
+        <div class="ca-logo-slot" data-size="52"></div>
+        <div style="min-width:0;">
+          <div id="ca-banner-org-name" class="ca-banner-org">PPM AL-AZHAR MUNCAR</div>
+          <div id="ca-banner-org-loc" class="ca-banner-loc">Banyuwangi Jawa Timur</div>
+        </div>
+      </div>
+      <div class="ca-banner-right">
+        <div class="ca-banner-kicker" id="ca-banner-mode-text">Realtime Online</div>
+        <div class="ca-banner-title">Administration App</div>
+      </div>
+    </header>
+
+    <!-- Main Dynamic Workspace -->
+    <main id="ca-main-content" class="ca-main"></main>
+
+    <!-- Bottom Status Bar -->
+    <footer class="ca-statusbar">
+      <div class="ca-status-group">
+        <span>Petugas: <strong id="ca-status-user">-</strong></span>
+        <span aria-hidden="true">|</span>
+        <span>Status API: <strong id="ca-status-api">Online / Ready</strong></span>
+      </div>
+      <div class="ca-status-group">
+        <span id="ca-status-clock" class="ca-mono">--</span>
+        <span aria-hidden="true">|</span>
+        <span id="ca-status-org">PPM Al-Azhar Muncar · v1.3.0</span>
+        <button type="button" id="ca-footer-fullscreen" class="ca-btn-footer-fs ca-fs-btn" title="Masuk atau keluar mode layar penuh" aria-pressed="false">
+          <span class="ca-fs-icon" aria-hidden="true">&#x26F6;</span>
+          <span class="ca-fs-text">Fullscreen</span>
+        </button>
+      </div>
+    </footer>
+  </section>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="ca-mobile-drawer" class="ca-drawer-backdrop ca-hidden">
+    <div class="ca-drawer-panel">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding-bottom:12px; border-bottom:1px solid #e2e8f0; margin-bottom:12px;">
+        <strong style="color:#0b3b8c;">Menu Sistem</strong>
+        <button type="button" id="ca-mobile-drawer-close" class="ca-btn ca-btn-outline ca-btn-sm">Tutup</button>
+      </div>
+      <div id="ca-mobile-menu-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+    </div>
+  </div>
+
+  <!-- Reusable Modal Container -->
+  <div id="ca-modal" class="ca-modal-backdrop ca-hidden">
+    <div class="ca-modal-box">
+      <div style="padding:14px 18px; background:#f8fafc; border-bottom:1px solid #e2e8f0; display:flex; align-items:center; justify-content:space-between;">
+        <strong id="ca-modal-title" style="font-size:15px;">Modal</strong>
+        <button type="button" id="ca-modal-close" style="background:none; border:none; font-size:18px; cursor:pointer; color:#64748b;">&times;</button>
+      </div>
+      <div id="ca-modal-body" style="padding:18px; max-height:75vh; overflow-y:auto;"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // =========================================================================
+      // PASANG FULL-SCREEN MENUTUP TEMA BLOGGER (KELUAR DARI WRAPPER POSTINGAN)
+      // =========================================================================
+      var rootEl = document.getElementById("cashless-app-root");
+      if (rootEl && document.body && rootEl.parentNode !== document.body) {
+        document.body.appendChild(rootEl);
+      }
+      if (document.documentElement) document.documentElement.style.overflow = "hidden";
+      if (document.body) document.body.style.overflow = "hidden";
+
+      // =========================================================================
+      // KONFIGURASI DEFAULT: Isi URL Web App Google Apps Script Anda di sini
+      // =========================================================================
+      const DEFAULT_GAS_URL = "";
+
+      const STORAGE_KEYS = {
+        GAS_URL: "alazhar_cashless_gas_url",
+        SESSION: "alazhar_cashless_session",
+        DEMO_DB: "alazhar_cashless_demo_db",
+        SETTINGS: "cashless_institution_settings"
+      };
+
+      const DEFAULT_SETTINGS = {
+        nama_lembaga: "PPM Al-Azhar Muncar",
+        subjudul_aplikasi: "Aplikasi Sistem Informasi Cashless",
+        alamat: "Banyuwangi, Jawa Timur",
+        kota: "Banyuwangi Jawa Timur",
+        telepon: "",
+        email_website: "",
+        nama_unit: "Koperasi & Kantin Santri",
+        footer_struk: "Terima kasih · Simpan sebagai bukti transaksi sah",
+        logo_url: ""
+      };
+
+      function loadStoredSettings() {
+        var raw = localStorage.getItem(STORAGE_KEYS.SETTINGS);
+        if (raw) {
+          try {
+            return Object.assign({}, DEFAULT_SETTINGS, JSON.parse(raw));
+          } catch (e) {}
+        }
+        return Object.assign({}, DEFAULT_SETTINGS);
+      }
+
+      function saveStoredSettings(next) {
+        var merged = Object.assign({}, DEFAULT_SETTINGS, next || {});
+        localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(merged));
+        return merged;
+      }
+
+      const state = {
+        gasUrl: localStorage.getItem(STORAGE_KEYS.GAS_URL) || DEFAULT_GAS_URL,
+        user: null,
+        loginRole: "admin",
+        activeView: "home",
+        santri: [],
+        transaksi: [],
+        users: [],
+        logs: [],
+        settings: loadStoredSettings(),
+        serverOffsetMs: 0,
+        selectedSantriNis: null,
+        loading: false
+      };
+
+      function getInitials(name) {
+        var words = String(name || "").replace(/[^a-zA-Z0-9\s]/g, " ").trim().split(/\s+/).filter(Boolean);
+        if (!words.length) return "LP";
+        if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+        return (words[0][0] + words[1][0]).toUpperCase();
+      }
+
+      // Render logo dari upload/URL lembaga atau monogram inisial netral (tanpa logo bawaan hardcoded)
+      function renderLogoHtml(size, customLogoUrl, customName) {
+        var px = Number(size || 52);
+        var url = customLogoUrl !== undefined ? customLogoUrl : (state.settings.logo_url || "");
+        var name = customName !== undefined ? customName : (state.settings.nama_lembaga || "Lembaga");
+        if (url) {
+          return '<div style="width:' + px + 'px; height:' + px + 'px; border-radius:12px; background:#ffffff; border:1px solid #cbd5e1; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:4px; flex-shrink:0; box-shadow:0 1px 3px rgba(15,23,42,0.06);">' +
+            '<img src="' + escapeHtml(url) + '" alt="Logo ' + escapeHtml(name) + '" referrerpolicy="no-referrer" style="width:100%; height:100%; object-fit:contain; display:block;" />' +
+          '</div>';
+        }
+        var fontSize = Math.max(12, Math.round(px * 0.34));
+        return '<div aria-label="Logo ' + escapeHtml(name) + '" style="width:' + px + 'px; height:' + px + 'px; border-radius:12px; background:#f1f5f9; border:1px dashed #94a3b8; color:#0b3b8c; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:' + fontSize + 'px; flex-shrink:0; user-select:none;">' +
+          escapeHtml(getInitials(name)) +
+        '</div>';
+      }
+
+      function applyInstitutionBranding() {
+        var s = state.settings || DEFAULT_SETTINGS;
+        var locDisplay = s.alamat || s.kota || "";
+        var bannerLocDisplay = s.kota || s.alamat || "";
+
+        document.querySelectorAll("#cashless-app-root .ca-logo-slot").forEach(function (el) {
+          el.innerHTML = renderLogoHtml(el.getAttribute("data-size") || 52);
+        });
+
+        var loginSub = document.getElementById("ca-login-subtitle");
+        var loginName = document.getElementById("ca-login-org-name");
+        var loginLoc = document.getElementById("ca-login-org-loc");
+        var loginPhone = document.getElementById("ca-login-org-phone");
+        var bannerName = document.getElementById("ca-banner-org-name");
+        var bannerLoc = document.getElementById("ca-banner-org-loc");
+        var statusOrg = document.getElementById("ca-status-org");
+
+        if (loginSub) loginSub.textContent = s.subjudul_aplikasi || DEFAULT_SETTINGS.subjudul_aplikasi;
+        if (loginName) loginName.textContent = s.nama_lembaga || DEFAULT_SETTINGS.nama_lembaga;
+        if (loginLoc) loginLoc.textContent = locDisplay;
+        if (loginPhone) {
+          var metaParts = [];
+          if (s.telepon) metaParts.push("Telp: " + s.telepon);
+          if (s.email_website) metaParts.push(s.email_website);
+          loginPhone.textContent = metaParts.join(" · ");
+          loginPhone.style.display = metaParts.length ? "block" : "none";
+        }
+        if (bannerName) bannerName.textContent = s.nama_lembaga || DEFAULT_SETTINGS.nama_lembaga;
+        if (bannerLoc) bannerLoc.textContent = bannerLocDisplay;
+        if (statusOrg) statusOrg.textContent = (s.nama_lembaga || DEFAULT_SETTINGS.nama_lembaga) + " · v1.3.0";
+      }
+
+      function compressLogoFile(file) {
+        return new Promise(function (resolve, reject) {
+          if (!file || !file.type || file.type.indexOf("image/") !== 0) {
+            return reject(new Error("File harus berupa gambar (PNG, JPG, WebP, atau SVG)."));
+          }
+          if (file.type === "image/svg+xml") {
+            var reader = new FileReader();
+            reader.onload = function () {
+              var txt = String(reader.result || "");
+              if (txt.length < 28000) {
+                return resolve("data:image/svg+xml;charset=utf-8," + encodeURIComponent(txt));
+              }
+              rasterize();
+            };
+            reader.onerror = function () { reject(new Error("Gagal membaca file SVG.")); };
+            reader.readAsText(file);
+            return;
+          }
+          rasterize();
+
+          function rasterize() {
+            var objUrl = URL.createObjectURL(file);
+            var img = new Image();
+            img.onload = function () {
+              try {
+                var maxDim = 220;
+                var w0 = img.width || maxDim;
+                var h0 = img.height || maxDim;
+                var scale = Math.min(1, maxDim / Math.max(w0, h0));
+                var w = Math.max(1, Math.round(w0 * scale));
+                var h = Math.max(1, Math.round(h0 * scale));
+                var canvas = document.createElement("canvas");
+                canvas.width = w;
+                canvas.height = h;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, w, h);
+                var dataUrl = canvas.toDataURL("image/png");
+                if (dataUrl.length > 44000) dataUrl = canvas.toDataURL("image/webp", 0.84);
+                if (dataUrl.length > 44000) dataUrl = canvas.toDataURL("image/jpeg", 0.8);
+                if (dataUrl.length > 46000) {
+                  return reject(new Error("Ukuran gambar terlalu besar untuk Google Sheets. Pilih gambar lebih kecil."));
+                }
+                resolve(dataUrl);
+              } catch (err) {
+                reject(err);
+              } finally {
+                URL.revokeObjectURL(objUrl);
+              }
+            };
+            img.onerror = function () {
+              URL.revokeObjectURL(objUrl);
+              reject(new Error("Gagal memuat file gambar logo."));
+            };
+            img.src = objUrl;
+          }
+        });
+      }
+
+      applyInstitutionBranding();
+
+      // Seed Data Demo Lokal jika GAS URL belum diisi
+      function getDemoDb() {
+        var raw = localStorage.getItem(STORAGE_KEYS.DEMO_DB);
+        if (raw) {
+          try { return JSON.parse(raw); } catch (e) {}
+        }
+        var initial = {
+          users: [
+            { id: "USR-001", username: "admin", password: "admin123", nama_petugas: "Administrator Pondok", role: "admin", status: "aktif" },
+            { id: "USR-002", username: "kasir", password: "kasir123", nama_petugas: "Petugas Kantin Putra", role: "kasir", status: "aktif" }
+          ],
+          santri: [
+            { nis: "2026001", rfid_uid: "0014829104", nama_santri: "Ahmad Fauzi", kelas: "XI MA", saldo: 150000, limit_harian: 25000, status: "aktif" },
+            { nis: "2026002", rfid_uid: "0014829105", nama_santri: "Siti Nurhaliza", kelas: "X MTs", saldo: 85000, limit_harian: 20000, status: "aktif" },
+            { nis: "2026003", rfid_uid: "0014829106", nama_santri: "Muhammad Rizky", kelas: "XII MA", saldo: 220000, limit_harian: 30000, status: "aktif" },
+            { nis: "2026004", rfid_uid: "0014829107", nama_santri: "Aisyah Azzahra", kelas: "IX MTs", saldo: 12000, limit_harian: 15000, status: "aktif" }
+          ],
+          transaksi: [
+            {
+              id_transaksi: "TRX-DEMO-001",
+              tanggal_waktu: formatDateTime(new Date()),
+              nis: "2026001",
+              nama_santri: "Ahmad Fauzi",
+              jenis_transaksi: "Top Up",
+              nominal: 150000,
+              saldo_akhir: 150000,
+              petugas: "Administrator Pondok",
+              keterangan: "Setoran awal wali santri"
+            }
+          ],
+          logs: [
+            { id_log: "LOG-001", waktu: formatDateTime(new Date()), pengguna: "SYSTEM", aksi: "INIT_DEMO", detail: "Database demo lokal siap digunakan." }
+          ]
+        };
+        localStorage.setItem(STORAGE_KEYS.DEMO_DB, JSON.stringify(initial));
+        return initial;
+      }
+
+      function saveDemoDb(db) {
+        localStorage.setItem(STORAGE_KEYS.DEMO_DB, JSON.stringify(db));
+      }
+
+      // Helper Format & Waktu
+      function formatRupiah(num) {
+        return "Rp " + Number(num || 0).toLocaleString("id-ID");
+      }
+
+      function pad2(n) { return n < 10 ? "0" + n : String(n); }
+
+      function formatDateTime(d) {
+        return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate()) + " " +
+          pad2(d.getHours()) + ":" + pad2(d.getMinutes()) + ":" + pad2(d.getSeconds());
+      }
+
+      function getTodayPrefix() {
+        var d = new Date(Date.now() + state.serverOffsetMs);
+        return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+      }
+
+      function escapeHtml(str) {
+        return String(str == null ? "" : str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function showToast(msg, isError) {
+        var wrap = document.getElementById("ca-toast-wrap");
+        var el = document.createElement("div");
+        el.className = "ca-toast" + (isError ? " error" : "");
+        el.textContent = msg;
+        wrap.appendChild(el);
+        setTimeout(function () { el.remove(); }, 3800);
+      }
+
+      // Live Clock Status Bar
+      function updateClocks() {
+        var now = new Date();
+        var devStr = now.toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" }) + " · " + now.toLocaleTimeString("id-ID", { hour12: false });
+        var elStat = document.getElementById("ca-status-clock");
+        if (elStat) elStat.textContent = devStr;
+      }
+      setInterval(updateClocks, 1000);
+      updateClocks();
+
+      // API Client (CORS-safe POST text/plain + redirect: follow untuk Google Apps Script)
+      async function apiPost(action, payload) {
+        if (!state.gasUrl) {
+          return handleDemoApi(action, payload || {});
+        }
+        var body = Object.assign({ action: action }, payload || {});
+        var res = await fetch(state.gasUrl, {
+          method: "POST",
+          redirect: "follow",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          throw new Error("HTTP Error " + res.status);
+        }
+        var data = await res.json();
+        if (data.serverTime) {
+          state.serverOffsetMs = new Date(data.serverTime).getTime() - Date.now();
+        }
+        if (!data.ok) {
+          throw new Error(data.error || "Permintaan ditolak server.");
+        }
+        return data;
+      }
+
+      // Simulator Demo Lokal saat GAS URL kosong
+      function handleDemoApi(action, payload) {
+        var db = getDemoDb();
+        var today = getTodayPrefix();
+
+        function spentTodayFor(nis) {
+          return db.transaksi
+            .filter(function (t) { return t.nis === nis && t.jenis_transaksi === "Belanja" && String(t.tanggal_waktu).indexOf(today) === 0; })
+            .reduce(function (acc, t) { return acc + Number(t.nominal || 0); }, 0);
+        }
+
+        if (action === "ping") {
+          return {
+            ok: true,
+            status: "Mode Demo Lokal",
+            settings: Object.assign({}, DEFAULT_SETTINGS, db.settings || loadStoredSettings()),
+            serverTime: new Date().toISOString()
+          };
+        }
+        if (action === "getSettings") {
+          return {
+            ok: true,
+            settings: Object.assign({}, DEFAULT_SETTINGS, db.settings || loadStoredSettings())
+          };
+        }
+        if (action === "saveSettings") {
+          var nextSet = saveStoredSettings(Object.assign({}, DEFAULT_SETTINGS, db.settings || {}, payload.settings || {}));
+          db.settings = nextSet;
+          db.logs.unshift({
+            id_log: "LOG-" + Date.now(),
+            waktu: formatDateTime(new Date()),
+            pengguna: payload.petugas || "Admin",
+            aksi: "UBAH_PENGATURAN_LEMBAGA",
+            detail: nextSet.nama_lembaga
+          });
+          saveDemoDb(db);
+          return { ok: true, settings: nextSet };
+        }
+        if (action === "login") {
+          var uname = String(payload.username || "").trim().toLowerCase();
+          var pass = String(payload.password || "").trim();
+          var role = String(payload.role || "").trim().toLowerCase();
+          var u = db.users.find(function (x) { return x.username.toLowerCase() === uname; });
+          if (!u || u.password !== pass) throw new Error("Username atau password salah. (Demo: admin/admin123 atau kasir/kasir123)");
+          if (u.status !== "aktif") throw new Error("Akun nonaktif.");
+          if (role && u.role !== role) throw new Error("Hak akses tidak sesuai. Akun ini terdaftar sebagai " + u.role + ".");
+          db.logs.unshift({ id_log: "LOG-" + Date.now(), waktu: formatDateTime(new Date()), pengguna: u.nama_petugas, aksi: "LOGIN", detail: "Login lokal (" + u.role + ")" });
+          saveDemoDb(db);
+          return { ok: true, user: { id: u.id, username: u.username, nama_petugas: u.nama_petugas, role: u.role, status: u.status } };
+        }
+        if (action === "getBootstrap") {
+          var enriched = db.santri.map(function (s) {
+            return Object.assign({}, s, { terpakai_hari_ini: spentTodayFor(s.nis) });
+          });
+          return {
+            ok: true,
+            santri: enriched,
+            transaksi: db.transaksi.slice(),
+            users: db.users.map(function (x) { return { id: x.id, username: x.username, nama_petugas: x.nama_petugas, role: x.role, status: x.status }; }),
+            logs: db.logs.slice(),
+            settings: Object.assign({}, DEFAULT_SETTINGS, db.settings || loadStoredSettings())
+          };
+        }
+        if (action === "createTransaksi") {
+          var s = db.santri.find(function (x) {
+            return (payload.nis && x.nis === payload.nis) || (payload.rfid_uid && x.rfid_uid === payload.rfid_uid);
+          });
+          if (!s) throw new Error("Santri / kartu RFID tidak ditemukan.");
+          if (s.status !== "aktif") throw new Error("Kartu santri berstatus nonaktif.");
+          var nom = Number(payload.nominal || 0);
+          if (nom <= 0) throw new Error("Nominal harus lebih dari Rp 0.");
+          var spent = spentTodayFor(s.nis);
+          if (payload.jenis_transaksi === "Belanja") {
+            if (s.saldo < nom) throw new Error("Saldo tidak mencukupi. Sisa saldo: " + formatRupiah(s.saldo));
+            if (s.limit_harian > 0 && spent + nom > s.limit_harian) {
+              throw new Error("Melebihi limit harian (" + formatRupiah(s.limit_harian) + "). Sisa limit hari ini: " + formatRupiah(Math.max(0, s.limit_harian - spent)));
+            }
+            s.saldo -= nom;
+            spent += nom;
+          } else if (payload.jenis_transaksi === "Tarik Tunai") {
+            if (s.saldo < nom) throw new Error("Saldo tidak mencukupi untuk tarik tunai.");
+            s.saldo -= nom;
+          } else if (payload.jenis_transaksi === "Top Up") {
+            s.saldo += nom;
+          }
+          var trx = {
+            id_transaksi: "TRX-" + Date.now().toString().slice(-8),
+            tanggal_waktu: formatDateTime(new Date()),
+            nis: s.nis,
+            nama_santri: s.nama_santri,
+            jenis_transaksi: payload.jenis_transaksi,
+            nominal: nom,
+            saldo_akhir: s.saldo,
+            petugas: payload.petugas || "Petugas",
+            keterangan: payload.keterangan || "-"
+          };
+          db.transaksi.unshift(trx);
+          db.logs.unshift({ id_log: "LOG-" + Date.now(), waktu: trx.tanggal_waktu, pengguna: trx.petugas, aksi: "TRANSAKSI_" + payload.jenis_transaksi.toUpperCase(), detail: trx.id_transaksi + " | " + s.nama_santri + " | " + formatRupiah(nom) });
+          saveDemoDb(db);
+          return { ok: true, transaksi: trx, santri: Object.assign({}, s, { terpakai_hari_ini: spent }) };
+        }
+        if (action === "saveSantri") {
+          var item = payload.santri;
+          if (payload.mode === "create") {
+            if (db.santri.some(function (x) { return x.nis === item.nis; })) throw new Error("NIS sudah terdaftar.");
+            db.santri.push(item);
+          } else {
+            var idx = db.santri.findIndex(function (x) { return x.nis === item.nis; });
+            if (idx === -1) throw new Error("Santri tidak ditemukan.");
+            db.santri[idx] = item;
+          }
+          db.logs.unshift({ id_log: "LOG-" + Date.now(), waktu: formatDateTime(new Date()), pengguna: payload.petugas || "Admin", aksi: payload.mode === "create" ? "TAMBAH_SANTRI" : "UBAH_SANTRI", detail: item.nis + " - " + item.nama_santri + " (Limit: " + formatRupiah(item.limit_harian) + ")" });
+          saveDemoDb(db);
+          return {
+            ok: true,
+            santri: db.santri.map(function (x) { return Object.assign({}, x, { terpakai_hari_ini: spentTodayFor(x.nis) }); })
+          };
+        }
+        if (action === "deleteSantri") {
+          db.santri = db.santri.filter(function (x) { return x.nis !== payload.nis; });
+          saveDemoDb(db);
+          return { ok: true, santri: db.santri };
+        }
+        if (action === "saveUser") {
+          var uItem = payload.user;
+          if (payload.mode === "create") {
+            uItem.id = "USR-" + Date.now().toString().slice(-4);
+            db.users.push(uItem);
+          } else {
+            var uidx = db.users.findIndex(function (x) { return x.id === uItem.id; });
+            if (uidx === -1) throw new Error("Pengguna tidak ditemukan.");
+            db.users[uidx] = Object.assign({}, db.users[uidx], uItem, { password: uItem.password || db.users[uidx].password });
+          }
+          saveDemoDb(db);
+          return { ok: true, users: db.users };
+        }
+        if (action === "deleteUser") {
+          db.users = db.users.filter(function (x) { return x.id !== payload.id; });
+          saveDemoDb(db);
+          return { ok: true, users: db.users };
+        }
+        return { ok: true };
+      }
+
+      // ==================== UI HELPERS & LOGIN ====================
+      function updateConnLabels() {
+        var isOnline = Boolean(state.gasUrl);
+        var loginLabel = document.getElementById("ca-login-conn-label");
+        var statusApi = document.getElementById("ca-status-api");
+        var bannerMode = document.getElementById("ca-banner-mode-text");
+        if (loginLabel) loginLabel.textContent = isOnline ? "Google Sheets API Aktif" : "Mode Demo Lokal";
+        if (statusApi) statusApi.textContent = isOnline ? "Online / Ready" : "Mode Demo Lokal";
+        if (bannerMode) bannerMode.textContent = isOnline ? "Realtime Online" : "Demo Mode Lokal";
+      }
+
+      document.getElementById("ca-gas-url-input").value = state.gasUrl;
+      updateConnLabels();
+
+      // Role selector tabs on Login
+      document.querySelectorAll("#cashless-app-root .ca-role-tab").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll("#cashless-app-root .ca-role-tab").forEach(function (b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          state.loginRole = btn.getAttribute("data-role");
+        });
+      });
+
+      document.getElementById("ca-toggle-pass").addEventListener("click", function () {
+        var inp = document.getElementById("ca-login-password");
+        var isPass = inp.type === "password";
+        inp.type = isPass ? "text" : "password";
+        this.textContent = isPass ? "Sembunyi" : "Lihat";
+      });
+
+      document.getElementById("ca-toggle-api-box").addEventListener("click", function () {
+        document.getElementById("ca-api-config-box").classList.toggle("ca-hidden");
+      });
+
+      document.getElementById("ca-save-gas-url").addEventListener("click", async function () {
+        var url = document.getElementById("ca-gas-url-input").value.trim();
+        if (!url) return showToast("Masukkan URL Web App terlebih dahulu.", true);
+        state.gasUrl = url;
+        localStorage.setItem(STORAGE_KEYS.GAS_URL, url);
+        try {
+          var pingRes = await apiPost("ping", {});
+          if (pingRes.settings) {
+            state.settings = saveStoredSettings(pingRes.settings);
+            applyInstitutionBranding();
+          }
+          updateConnLabels();
+          showToast("Koneksi ke Google Sheets berhasil!");
+        } catch (err) {
+          showToast("Gagal terhubung ke GAS: " + err.message, true);
+        }
+      });
+
+      document.getElementById("ca-use-demo-mode").addEventListener("click", function () {
+        state.gasUrl = "";
+        localStorage.removeItem(STORAGE_KEYS.GAS_URL);
+        document.getElementById("ca-gas-url-input").value = "";
+        updateConnLabels();
+        showToast("Beralih ke Mode Demo Lokal (login: admin/admin123 atau kasir/kasir123).");
+      });
+
+      document.getElementById("ca-btn-reset").addEventListener("click", function () {
+        document.getElementById("ca-login-username").value = "";
+        document.getElementById("ca-login-password").value = "";
+        document.getElementById("ca-login-error").classList.add("ca-hidden");
+      });
+
+      document.getElementById("ca-login-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        var errBox = document.getElementById("ca-login-error");
+        var btn = document.getElementById("ca-btn-login");
+        errBox.classList.add("ca-hidden");
+        btn.disabled = true;
+        btn.textContent = "Memverifikasi...";
+
+        try {
+          var username = document.getElementById("ca-login-username").value.trim();
+          var password = document.getElementById("ca-login-password").value.trim();
+          var res = await apiPost("login", { username: username, password: password, role: state.loginRole });
+          state.user = res.user;
+          sessionStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(res.user));
+          await enterDashboard();
+        } catch (err) {
+          errBox.textContent = err.message;
+          errBox.classList.remove("ca-hidden");
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = "<span>&#10004;</span> LOGIN";
+        }
+      });
+
+      // ==================== DASHBOARD & NAVIGATION ====================
+      async function enterDashboard() {
+        document.getElementById("ca-login-view").classList.add("ca-hidden");
+        document.getElementById("ca-dashboard-view").classList.remove("ca-hidden");
+        document.getElementById("ca-status-user").textContent = state.user.nama_petugas + " (" + state.user.role.toUpperCase() + ")";
+        updateConnLabels();
+
+        var isAdmin = state.user.role === "admin";
+        document.querySelectorAll("#cashless-app-root .ca-admin-only").forEach(function (el) {
+          el.classList.toggle("ca-hidden", !isAdmin);
+        });
+        buildMobileMenu();
+        await syncBootstrapData();
+        navigateTo("home");
+      }
+
+      async function syncBootstrapData() {
+        try {
+          var data = await apiPost("getBootstrap", { role: state.user.role });
+          state.santri = data.santri || [];
+          state.transaksi = data.transaksi || [];
+          if (data.users) state.users = data.users;
+          if (data.logs) state.logs = data.logs;
+          if (data.settings) {
+            state.settings = saveStoredSettings(data.settings);
+            applyInstitutionBranding();
+          }
+        } catch (err) {
+          showToast("Gagal memuat data: " + err.message, true);
+        }
+      }
+
+      function logout() {
+        state.user = null;
+        sessionStorage.removeItem(STORAGE_KEYS.SESSION);
+        document.getElementById("ca-dashboard-view").classList.add("ca-hidden");
+        document.getElementById("ca-login-view").classList.remove("ca-hidden");
+        document.getElementById("ca-login-password").value = "";
+        closeAllDropdowns();
+      }
+
+      function closeAllDropdowns() {
+        document.querySelectorAll("#cashless-app-root .ca-dropdown").forEach(function (d) { d.classList.add("ca-hidden"); });
+        document.querySelectorAll("#cashless-app-root .ca-menu-trigger").forEach(function (t) { t.classList.remove("open"); });
+      }
+
+      document.querySelectorAll("#cashless-app-root .ca-menu-trigger[data-menu]").forEach(function (trigger) {
+        trigger.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var targetId = "ca-dd-" + trigger.getAttribute("data-menu");
+          var dd = document.getElementById(targetId);
+          var wasOpen = !dd.classList.contains("ca-hidden");
+          closeAllDropdowns();
+          if (!wasOpen) {
+            dd.classList.remove("ca-hidden");
+            trigger.classList.add("open");
+          }
+        });
+      });
+
+      document.addEventListener("click", function () { closeAllDropdowns(); });
+
+      document.querySelectorAll("#cashless-app-root [data-nav]").forEach(function (el) {
+        el.addEventListener("click", function () {
+          closeAllDropdowns();
+          navigateTo(el.getAttribute("data-nav"));
+        });
+      });
+
+      document.getElementById("ca-action-logout").addEventListener("click", logout);
+      document.getElementById("ca-top-logout").addEventListener("click", logout);
+      document.getElementById("ca-action-sync").addEventListener("click", async function () {
+        closeAllDropdowns();
+        await syncBootstrapData();
+        renderCurrentView();
+        showToast("Data berhasil disinkronkan.");
+      });
+
+      function getFullscreenElement() {
+        return document.fullscreenElement ||
+          document.webkitFullscreenElement ||
+          document.mozFullScreenElement ||
+          document.msFullscreenElement ||
+          null;
+      }
+
+      function syncFullscreenButtons() {
+        var active = Boolean(getFullscreenElement());
+        rootEl.querySelectorAll(".ca-fs-btn").forEach(function (btn) {
+          btn.setAttribute("aria-pressed", active ? "true" : "false");
+          if (btn.id === "ca-top-fullscreen" || btn.id === "ca-login-fullscreen") {
+            btn.classList.toggle("ca-btn-fs-active", active);
+          }
+          var txtEl = btn.querySelector(".ca-fs-text");
+          if (txtEl) {
+            txtEl.textContent = active ? "Keluar Fullscreen" : "Fullscreen";
+          }
+          var iconEl = btn.querySelector(".ca-fs-icon");
+          if (iconEl) {
+            iconEl.innerHTML = active ? "&#x2715;" : "&#x26F6;";
+          }
+        });
+      }
+
+      async function toggleFullscreen() {
+        var activeEl = getFullscreenElement();
+        try {
+          if (activeEl) {
+            if (document.exitFullscreen) await document.exitFullscreen();
+            else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
+            else if (document.mozCancelFullScreen) await document.mozCancelFullScreen();
+            else if (document.msExitFullscreen) await document.msExitFullscreen();
+          } else {
+            var target = rootEl || document.documentElement;
+            if (target.requestFullscreen) await target.requestFullscreen();
+            else if (target.webkitRequestFullscreen) await target.webkitRequestFullscreen();
+            else if (target.mozRequestFullScreen) await target.mozRequestFullScreen();
+            else if (target.msRequestFullscreen) await target.msRequestFullscreen();
+            else showToast("Browser ini tidak mendukung Fullscreen API.", true);
+          }
+        } catch (err) {
+          showToast("Mode layar penuh tidak diizinkan oleh browser/iframe saat ini.", true);
+        }
+      }
+
+      rootEl.querySelectorAll(".ca-fs-btn").forEach(function (btn) {
+        btn.addEventListener("click", toggleFullscreen);
+      });
+      document.addEventListener("fullscreenchange", syncFullscreenButtons);
+      document.addEventListener("webkitfullscreenchange", syncFullscreenButtons);
+      document.addEventListener("mozfullscreenchange", syncFullscreenButtons);
+      document.addEventListener("MSFullscreenChange", syncFullscreenButtons);
+      syncFullscreenButtons();
+
+      function buildMobileMenu() {
+        var isAdmin = state.user && state.user.role === "admin";
+        var links = [
+          { nav: "home", label: "Beranda Utama" },
+          { nav: "kasir", label: "0321. Transaksi Kasir / Belanja" },
+          { nav: "topup", label: "0322. Top Up Saldo" },
+          { nav: "tarik", label: "0323. Tarik Tunai" },
+          { nav: "mutasi", label: "0324. Cek Saldo & Mutasi" },
+          { nav: "laporan", label: "0401. Laporan Transaksi" }
+        ];
+        if (isAdmin) {
+          links.push({ nav: "santri", label: "0202. Setup Santri & Kartu RFID" });
+          links.push({ nav: "users", label: "0201. Setup Pengguna" });
+          links.push({ nav: "institution", label: "0204. Pengaturan Lembaga & Logo" });
+          links.push({ nav: "logs", label: "0211. Log Sistem" });
+        }
+        links.push({ nav: "settings", label: "0205. Setup Koneksi API" });
+
+        var listEl = document.getElementById("ca-mobile-menu-list");
+        listEl.innerHTML = links.map(function (l) {
+          return '<button type="button" class="ca-btn ca-btn-outline" style="justify-content:flex-start;" data-mnav="' + l.nav + '">' + l.label + '</button>';
+        }).join("") + '<button type="button" id="ca-mobile-logout" class="ca-btn ca-btn-crimson" style="margin-top:8px;">Logout</button>';
+
+        listEl.querySelectorAll("[data-mnav]").forEach(function (b) {
+          b.addEventListener("click", function () {
+            document.getElementById("ca-mobile-drawer").classList.add("ca-hidden");
+            navigateTo(b.getAttribute("data-mnav"));
+          });
+        });
+        document.getElementById("ca-mobile-logout").addEventListener("click", function () {
+          document.getElementById("ca-mobile-drawer").classList.add("ca-hidden");
+          logout();
+        });
+      }
+
+      document.getElementById("ca-mobile-drawer-open").addEventListener("click", function () {
+        document.getElementById("ca-mobile-drawer").classList.remove("ca-hidden");
+      });
+      document.getElementById("ca-mobile-drawer-close").addEventListener("click", function () {
+        document.getElementById("ca-mobile-drawer").classList.add("ca-hidden");
+      });
+
+      function navigateTo(view) {
+        state.activeView = view;
+        renderCurrentView();
+      }
+
+      function renderCurrentView() {
+        var main = document.getElementById("ca-main-content");
+        if (state.activeView === "home") renderHome(main);
+        else if (state.activeView === "kasir") renderTransaksiView(main, "Belanja");
+        else if (state.activeView === "topup") renderTransaksiView(main, "Top Up");
+        else if (state.activeView === "tarik") renderTransaksiView(main, "Tarik Tunai");
+        else if (state.activeView === "mutasi") renderMutasiView(main);
+        else if (state.activeView === "santri") renderSantriView(main);
+        else if (state.activeView === "users") renderUsersView(main);
+        else if (state.activeView === "laporan") renderLaporanView(main);
+        else if (state.activeView === "logs") renderLogsView(main);
+        else if (state.activeView === "institution") renderInstitutionSettingsView(main);
+        else if (state.activeView === "settings") renderSettingsView(main);
+      }
+
+      // ==================== VIEW RENDERERS ====================
+      function renderHome(container) {
+        var s = state.settings || DEFAULT_SETTINGS;
+        var totalSaldo = state.santri.reduce(function (a, b) { return a + Number(b.saldo || 0); }, 0);
+        var today = getTodayPrefix();
+        var todayCount = state.transaksi.filter(function (t) { return String(t.tanggal_waktu).indexOf(today) === 0; }).length;
+        var kontakInfo = [s.telepon ? "Telp: " + s.telepon : "", s.email_website || ""].filter(Boolean).join(" · ");
+
+        container.innerHTML =
+          '<div class="ca-home-stage">' +
+            renderLogoHtml(112) +
+            '<h2 class="ca-home-title">' + escapeHtml(s.nama_lembaga || DEFAULT_SETTINGS.nama_lembaga) + '</h2>' +
+            '<p class="ca-home-sub">' + escapeHtml(s.alamat || s.kota || "") + '</p>' +
+            (kontakInfo ? '<p style="font-size:12px; color:#475569; margin-top:4px;">' + escapeHtml(kontakInfo) + '</p>' : '') +
+            '<p style="font-size:13px; color:#334155; margin-top:8px;">' + state.santri.length + ' Santri Terdaftar &middot; Total Saldo Aktif <strong class="ca-mono">' + formatRupiah(totalSaldo) + '</strong> &middot; ' + todayCount + ' Transaksi Hari Ini</p>' +
+            '<div class="ca-quick-grid">' +
+              '<button type="button" class="ca-quick-tile" data-qnav="kasir">' +
+                '<span class="ca-state-ok">0321 &middot; POS KASIR</span>' +
+                '<strong>Transaksi Belanja</strong>' +
+                '<span>Scan RFID atau input NIS dengan cek limit harian otomatis.</span>' +
+              '</button>' +
+              '<button type="button" class="ca-quick-tile" data-qnav="topup">' +
+                '<span style="color:#0b3b8c; font-weight:700;">0322 &middot; DEPOSIT</span>' +
+                '<strong>Top Up Saldo</strong>' +
+                '<span>Penambahan saldo kartu santri langsung ke Google Sheets.</span>' +
+              '</button>' +
+              '<button type="button" class="ca-quick-tile" data-qnav="tarik">' +
+                '<span class="ca-state-warn">0323 &middot; PENARIKAN</span>' +
+                '<strong>Tarik Tunai</strong>' +
+                '<span>Penarikan uang saku santri dengan pencatatan struk digital.</span>' +
+              '</button>' +
+              '<button type="button" class="ca-quick-tile" data-qnav="' + (state.user.role === "admin" ? "santri" : "mutasi") + '">' +
+                '<span style="color:#475569; font-weight:700;">' + (state.user.role === "admin" ? "0202 &middot; MASTER DATA" : "0324 &middot; INFORMASI") + '</span>' +
+                '<strong>' + (state.user.role === "admin" ? "Data Santri & RFID" : "Cek Saldo & Mutasi") + '</strong>' +
+                '<span>' + (state.user.role === "admin" ? "Kelola NIS, kartu RFID, status aktif, dan limit harian." : "Lihat sisa saldo dan riwayat transaksi per santri.") + '</span>' +
+              '</button>' +
+            '</div>' +
+          '</div>';
+
+        container.querySelectorAll("[data-qnav]").forEach(function (b) {
+          b.addEventListener("click", function () { navigateTo(b.getAttribute("data-qnav")); });
+        });
+      }
+
+      function renderTransaksiView(container, jenis) {
+        var titleMap = {
+          "Belanja": "0321. Transaksi Kasir / Belanja Santri",
+          "Top Up": "0322. Top Up Saldo Santri",
+          "Tarik Tunai": "0323. Penarikan Tunai Santri"
+        };
+        var defaultKet = jenis === "Belanja" ? "Belanja Kantin / Koperasi" : (jenis === "Top Up" ? "Setoran Saldo Santri" : "Penarikan Uang Saku");
+
+        container.innerHTML =
+          '<div class="ca-module-card">' +
+            '<div class="ca-module-head">' +
+              '<div><h2>' + titleMap[jenis] + '</h2><p>Tempelkan kartu RFID pada reader atau ketik NIS / Nama Santri.</p></div>' +
+              '<button type="button" class="ca-btn ca-btn-outline ca-btn-sm" id="ca-back-home">Kembali ke Beranda</button>' +
+            '</div>' +
+            '<div class="ca-module-body">' +
+              '<div class="ca-pos-grid">' +
+                '<div class="ca-panel">' +
+                  '<form id="ca-trx-form">' +
+                    '<div style="margin-bottom:12px;">' +
+                      '<label class="ca-label" for="ca-trx-scan">Scan RFID UID / Ketik NIS atau Nama Santri</label>' +
+                      '<input id="ca-trx-scan" class="ca-input ca-mono" type="text" placeholder="Scan kartu RFID atau ketik NIS..." autocomplete="off" />' +
+                      '<div id="ca-scan-matches" style="margin-top:6px; display:flex; flex-wrap:wrap; gap:6px;"></div>' +
+                    '</div>' +
+                    '<div id="ca-santri-card-info" class="ca-santri-summary ca-hidden"></div>' +
+                    '<div style="margin-top:14px;">' +
+                      '<label class="ca-label" for="ca-trx-nominal">Nominal ' + jenis + ' (Rp)</label>' +
+                      '<input id="ca-trx-nominal" class="ca-input ca-mono" type="number" min="500" step="500" placeholder="Contoh: 10000" style="font-size:18px; font-weight:700;" required />' +
+                      '<div class="ca-preset-grid">' +
+                        '<button type="button" class="ca-preset-btn" data-nom="2000">Rp 2.000</button>' +
+                        '<button type="button" class="ca-preset-btn" data-nom="5000">Rp 5.000</button>' +
+                        '<button type="button" class="ca-preset-btn" data-nom="10000">Rp 10.000</button>' +
+                        '<button type="button" class="ca-preset-btn" data-nom="15000">Rp 15.000</button>' +
+                        '<button type="button" class="ca-preset-btn" data-nom="20000">Rp 20.000</button>' +
+                        '<button type="button" class="ca-preset-btn" data-nom="50000">Rp 50.000</button>' +
+                      '</div>' +
+                    '</div>' +
+                    '<div style="margin-top:12px;">' +
+                      '<label class="ca-label" for="ca-trx-ket">Keterangan</label>' +
+                      '<input id="ca-trx-ket" class="ca-input" type="text" value="' + defaultKet + '" />' +
+                    '</div>' +
+                    '<div id="ca-trx-warn" class="ca-hidden" style="margin-top:12px; padding:10px 12px; background:#fef2f2; border:1px solid #fecaca; color:#991b1b; border-radius:8px; font-size:12.5px; font-weight:600;"></div>' +
+                    '<div style="margin-top:14px; display:flex; gap:10px;">' +
+                      '<button type="submit" id="ca-trx-submit" class="ca-btn ' + (jenis === "Top Up" ? "ca-btn-navy" : "ca-btn-emerald") + '" style="flex:1;">Konfirmasi ' + jenis + '</button>' +
+                      '<button type="button" id="ca-trx-clear" class="ca-btn ca-btn-outline">Reset</button>' +
+                    '</div>' +
+                  '</form>' +
+                '</div>' +
+                '<div class="ca-panel">' +
+                  '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">' +
+                    '<strong style="font-size:14px;">Riwayat Transaksi Terakhir</strong>' +
+                    '<span style="font-size:12px; color:#64748b;">10 terbaru</span>' +
+                  '</div>' +
+                  '<div class="ca-table-wrap">' +
+                    '<table class="ca-table"><thead><tr><th>Waktu</th><th>Santri</th><th>Jenis</th><th class="ca-text-right">Nominal</th></tr></thead>' +
+                    '<tbody>' +
+                      (state.transaksi.slice(0, 10).map(function (t) {
+                        var cls = t.jenis_transaksi === "Top Up" ? "ca-state-ok" : (t.jenis_transaksi === "Belanja" ? "ca-state-err" : "ca-state-warn");
+                        return '<tr>' +
+                          '<td class="ca-mono" style="font-size:11.5px;">' + escapeHtml(String(t.tanggal_waktu).slice(11, 19) || t.tanggal_waktu) + '</td>' +
+                          '<td><strong>' + escapeHtml(t.nama_santri) + '</strong><div style="font-size:11px; color:#64748b;">' + escapeHtml(t.nis) + '</div></td>' +
+                          '<td class="' + cls + '">' + escapeHtml(t.jenis_transaksi) + '</td>' +
+                          '<td class="ca-mono ca-text-right">' + formatRupiah(t.nominal) + '</td>' +
+                        '</tr>';
+                      }).join("") || '<tr><td colspan="4" style="text-align:center; color:#64748b; padding:18px;">Belum ada transaksi.</td></tr>') +
+                    '</tbody></table>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+
+        document.getElementById("ca-back-home").addEventListener("click", function () { navigateTo("home"); });
+
+        var scanInp = document.getElementById("ca-trx-scan");
+        var nomInp = document.getElementById("ca-trx-nominal");
+        scanInp.focus();
+
+        function findAndSelect(q) {
+          q = String(q || "").trim().toLowerCase();
+          var matchesBox = document.getElementById("ca-scan-matches");
+          if (!q) {
+            matchesBox.innerHTML = "";
+            state.selectedSantriNis = null;
+            renderSantriSummary();
+            return;
+          }
+          var exact = state.santri.find(function (s) { return s.rfid_uid.toLowerCase() === q || s.nis.toLowerCase() === q; });
+          if (exact) {
+            state.selectedSantriNis = exact.nis;
+            matchesBox.innerHTML = "";
+            renderSantriSummary();
+            return;
+          }
+          var list = state.santri.filter(function (s) {
+            return s.nis.toLowerCase().indexOf(q) !== -1 || s.nama_santri.toLowerCase().indexOf(q) !== -1 || s.rfid_uid.toLowerCase().indexOf(q) !== -1;
+          }).slice(0, 5);
+          matchesBox.innerHTML = list.map(function (s) {
+            return '<button type="button" class="ca-btn ca-btn-outline ca-btn-sm" data-pick="' + escapeHtml(s.nis) + '">' + escapeHtml(s.nama_santri) + ' (' + escapeHtml(s.nis) + ')</button>';
+          }).join("");
+          matchesBox.querySelectorAll("[data-pick]").forEach(function (b) {
+            b.addEventListener("click", function () {
+              state.selectedSantriNis = b.getAttribute("data-pick");
+              scanInp.value = state.selectedSantriNis;
+              matchesBox.innerHTML = "";
+              renderSantriSummary();
+              nomInp.focus();
+            });
+          });
+        }
+
+        function renderSantriSummary() {
+          var box = document.getElementById("ca-santri-card-info");
+          var s = state.santri.find(function (x) { return x.nis === state.selectedSantriNis; });
+          if (!s) { box.classList.add("ca-hidden"); return; }
+          var spent = Number(s.terpakai_hari_ini || 0);
+          var sisaLimit = s.limit_harian > 0 ? Math.max(0, s.limit_harian - spent) : null;
+          box.classList.remove("ca-hidden");
+          box.innerHTML =
+            '<div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">' +
+              '<div><strong style="font-size:15px; color:#0b3b8c;">' + escapeHtml(s.nama_santri) + '</strong><div style="font-size:12px; color:#475569;">NIS: <span class="ca-mono">' + escapeHtml(s.nis) + '</span> &middot; Kelas ' + escapeHtml(s.kelas) + '</div></div>' +
+              '<span class="' + (s.status === "aktif" ? "ca-state-ok" : "ca-state-err") + '">' + s.status.toUpperCase() + '</span>' +
+            '</div>' +
+            '<div class="ca-stat-row">' +
+              '<div class="ca-stat-cell"><span>Sisa Saldo</span><strong class="ca-mono">' + formatRupiah(s.saldo) + '</strong></div>' +
+              '<div class="ca-stat-cell"><span>Limit Harian</span><strong class="ca-mono">' + (s.limit_harian > 0 ? formatRupiah(s.limit_harian) : "Tanpa Limit") + '</strong></div>' +
+              '<div class="ca-stat-cell"><span>Sisa Limit Hari Ini</span><strong class="ca-mono">' + (sisaLimit !== null ? formatRupiah(sisaLimit) : "-") + '</strong></div>' +
+            '</div>';
+          validatePreview();
+        }
+
+        function validatePreview() {
+          var warn = document.getElementById("ca-trx-warn");
+          var s = state.santri.find(function (x) { return x.nis === state.selectedSantriNis; });
+          var nom = Number(nomInp.value || 0);
+          warn.classList.add("ca-hidden");
+          if (!s) return;
+          if (s.status !== "aktif") {
+            warn.textContent = "Kartu santri berstatus NONAKTIF. Transaksi diblokir.";
+            warn.classList.remove("ca-hidden");
+            return;
+          }
+          if (nom > 0 && (jenis === "Belanja" || jenis === "Tarik Tunai") && nom > s.saldo) {
+            warn.textContent = "Peringatan: Saldo tidak mencukupi (Sisa saldo " + formatRupiah(s.saldo) + ").";
+            warn.classList.remove("ca-hidden");
+            return;
+          }
+          if (nom > 0 && jenis === "Belanja" && s.limit_harian > 0 && (Number(s.terpakai_hari_ini || 0) + nom) > s.limit_harian) {
+            warn.textContent = "Peringatan: Melebihi batas limit belanja harian (" + formatRupiah(s.limit_harian) + ").";
+            warn.classList.remove("ca-hidden");
+          }
+        }
+
+        if (state.selectedSantriNis) renderSantriSummary();
+
+        scanInp.addEventListener("input", function () { findAndSelect(scanInp.value); });
+        scanInp.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            findAndSelect(scanInp.value);
+            if (state.selectedSantriNis) nomInp.focus();
+          }
+        });
+        nomInp.addEventListener("input", validatePreview);
+
+        container.querySelectorAll(".ca-preset-btn").forEach(function (b) {
+          b.addEventListener("click", function () {
+            nomInp.value = b.getAttribute("data-nom");
+            validatePreview();
+          });
+        });
+
+        document.getElementById("ca-trx-clear").addEventListener("click", function () {
+          state.selectedSantriNis = null;
+          scanInp.value = "";
+          nomInp.value = "";
+          document.getElementById("ca-scan-matches").innerHTML = "";
+          document.getElementById("ca-trx-warn").classList.add("ca-hidden");
+          renderSantriSummary();
+          scanInp.focus();
+        });
+
+        document.getElementById("ca-trx-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+          var s = state.santri.find(function (x) { return x.nis === state.selectedSantriNis; });
+          if (!s) return showToast("Pilih santri terlebih dahulu dengan scan RFID atau ketik NIS.", true);
+          var nom = Number(nomInp.value || 0);
+          var ket = document.getElementById("ca-trx-ket").value.trim();
+          var btn = document.getElementById("ca-trx-submit");
+          btn.disabled = true;
+          btn.textContent = "Memproses...";
+          try {
+            var res = await apiPost("createTransaksi", {
+              nis: s.nis,
+              rfid_uid: s.rfid_uid,
+              jenis_transaksi: jenis,
+              nominal: nom,
+              petugas: state.user.nama_petugas,
+              keterangan: ket
+            });
+            var idx = state.santri.findIndex(function (x) { return x.nis === res.santri.nis; });
+            if (idx !== -1) state.santri[idx] = res.santri;
+            state.transaksi.unshift(res.transaksi);
+            showToast(jenis + " berhasil dicatat!");
+            showReceiptModal(res.transaksi);
+            renderTransaksiView(container, jenis);
+          } catch (err) {
+            showToast(err.message, true);
+            btn.disabled = false;
+            btn.textContent = "Konfirmasi " + jenis;
+          }
+        });
+      }
+
+      function showReceiptModal(trx) {
+        var s = state.settings || DEFAULT_SETTINGS;
+        var modal = document.getElementById("ca-modal");
+        var paper = localStorage.getItem("alazhar_thermal_paper") === "80mm" ? "80mm" : "58mm";
+        document.getElementById("ca-modal-title").textContent = "Struk Digital Transaksi (Quick Print)";
+        document.getElementById("ca-modal-body").innerHTML =
+          '<div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:12px; font-size:12px;">' +
+            '<span style="font-weight:600; color:#475569;">Lebar Kertas Thermal:</span>' +
+            '<div style="display:flex; gap:6px;">' +
+              '<button type="button" class="ca-btn ca-btn-sm ' + (paper === "58mm" ? "ca-btn-navy" : "ca-btn-outline") + '" data-paper-pick="58mm">58mm</button>' +
+              '<button type="button" class="ca-btn ca-btn-sm ' + (paper === "80mm" ? "ca-btn-navy" : "ca-btn-outline") + '" data-paper-pick="80mm">80mm</button>' +
+            '</div>' +
+          '</div>' +
+          '<div id="ca-receipt-print" data-paper="' + paper + '" style="font-family: \'JetBrains Mono\', monospace; font-size:12px; border:1px dashed #94a3b8; padding:14px; border-radius:8px; background:#f8fafc; margin:0 auto; max-width:' + (paper === "58mm" ? "270px" : "340px") + ';">' +
+            '<div style="text-align:center; border-bottom:1px dashed #cbd5e1; padding-bottom:10px; margin-bottom:10px;">' +
+              (s.logo_url ? '<img src="' + escapeHtml(s.logo_url) + '" alt="' + escapeHtml(s.nama_lembaga) + '" referrerpolicy="no-referrer" style="width:42px; height:42px; object-fit:contain; display:block; margin:0 auto 4px;" />' : '') +
+              '<strong style="font-size:14px;">' + escapeHtml(s.nama_lembaga || DEFAULT_SETTINGS.nama_lembaga) + '</strong><br/>' +
+              (s.nama_unit ? '<span style="font-size:11px; font-weight:700;">' + escapeHtml(s.nama_unit) + '</span><br/>' : '') +
+              ((s.alamat || s.kota) ? '<span style="font-size:11px;">' + escapeHtml(s.alamat || s.kota) + '</span><br/>' : '') +
+              (s.telepon ? '<span style="font-size:10.5px;">Telp: ' + escapeHtml(s.telepon) + '</span><br/>' : '') +
+              '<span style="font-size:11px; color:#64748b;">BUKTI TRANSAKSI CASHLESS</span>' +
+            '</div>' +
+            '<div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>No. Trx</span><strong>' + escapeHtml(trx.id_transaksi) + '</strong></div>' +
+            '<div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Waktu</span><span>' + escapeHtml(trx.tanggal_waktu) + '</span></div>' +
+            '<div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Santri</span><strong>' + escapeHtml(trx.nama_santri) + '</strong></div>' +
+            '<div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>NIS</span><span>' + escapeHtml(trx.nis) + '</span></div>' +
+            '<div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Jenis</span><strong>' + escapeHtml(trx.jenis_transaksi) + '</strong></div>' +
+            '<div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Nominal</span><strong>' + formatRupiah(trx.nominal) + '</strong></div>' +
+            '<div style="display:flex; justify-content:space-between; border-top:1px dashed #cbd5e1; padding-top:8px; margin-top:8px;"><span>Saldo Akhir</span><strong style="color:#15803d; font-size:14px;">' + formatRupiah(trx.saldo_akhir) + '</strong></div>' +
+            '<div style="margin-top:8px; font-size:11px; color:#64748b; border-top:1px dashed #cbd5e1; padding-top:8px;">Petugas: ' + escapeHtml(trx.petugas) + '<br/>Ket: ' + escapeHtml(trx.keterangan) + '<div style="text-align:center; margin-top:8px; font-size:10px;">' + escapeHtml(s.footer_struk || DEFAULT_SETTINGS.footer_struk) + '</div></div>' +
+          '</div>' +
+          '<div style="margin-top:14px; display:flex; justify-content:flex-end; gap:8px;">' +
+            '<button type="button" class="ca-btn ca-btn-navy ca-btn-sm" style="flex:1;" id="ca-print-receipt">Quick Print (' + paper + ')</button>' +
+            '<button type="button" class="ca-btn ca-btn-outline ca-btn-sm" id="ca-close-receipt">Selesai</button>' +
+          '</div>';
+        modal.classList.remove("ca-hidden");
+        var printBtn = document.getElementById("ca-print-receipt");
+        printBtn.focus();
+        document.querySelectorAll("[data-paper-pick]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            localStorage.setItem("alazhar_thermal_paper", btn.getAttribute("data-paper-pick"));
+            showReceiptModal(trx);
+          });
+        });
+        document.getElementById("ca-close-receipt").addEventListener("click", function () { modal.classList.add("ca-hidden"); });
+        printBtn.addEventListener("click", function () {
+          var onAfter = function () {
+            window.removeEventListener("afterprint", onAfter);
+            modal.classList.add("ca-hidden");
+          };
+          window.addEventListener("afterprint", onAfter);
+          window.print();
+        });
+      }
+
+      function renderMutasiView(container) {
+        container.innerHTML =
+          '<div class="ca-module-card">' +
+            '<div class="ca-module-head">' +
+              '<div><h2>0324. Cek Saldo &amp; Mutasi Santri</h2><p>Cari berdasarkan RFID, NIS, atau Nama Santri.</p></div>' +
+              '<button type="button" class="ca-btn ca-btn-outline ca-btn-sm" id="ca-back-home">Kembali</button>' +
+            '</div>' +
+            '<div class="ca-module-body">' +
+              '<input id="ca-mutasi-search" class="ca-input" type="text" placeholder="Ketik NIS, RFID UID, atau Nama Santri..." style="max-width:420px; margin-bottom:14px;" />' +
+              '<div id="ca-mutasi-result"></div>' +
+            '</div>' +
+          '</div>';
+        document.getElementById("ca-back-home").addEventListener("click", function () { navigateTo("home"); });
+
+        function renderList(q) {
+          q = String(q || "").trim().toLowerCase();
+          var list = state.santri.filter(function (s) {
+            return !q || s.nis.toLowerCase().indexOf(q) !== -1 || s.nama_santri.toLowerCase().indexOf(q) !== -1 || s.rfid_uid.toLowerCase().indexOf(q) !== -1;
+          });
+          var rows = list.map(function (s) {
+            return '<tr>' +
+              '<td class="ca-mono">' + escapeHtml(s.nis) + '</td>' +
+              '<td class="ca-mono">' + escapeHtml(s.rfid_uid || "-") + '</td>' +
+              '<td><strong>' + escapeHtml(s.nama_santri) + '</strong></td>' +
+              '<td>' + escapeHtml(s.kelas) + '</td>' +
+              '<td class="ca-mono ca-text-right"><strong>' + formatRupiah(s.saldo) + '</strong></td>' +
+              '<td class="ca-mono ca-text-right">' + formatRupiah(s.limit_harian) + '</td>' +
+              '<td><button type="button" class="ca-btn ca-btn-outline ca-btn-sm" data-detail="' + escapeHtml(s.nis) + '">Mutasi</button></td>' +
+            '</tr>';
+          }).join("");
+          document.getElementById("ca-mutasi-result").innerHTML =
+            '<div class="ca-table-wrap"><table class="ca-table"><thead><tr><th>NIS</th><th>RFID UID</th><th>Nama Santri</th><th>Kelas</th><th class="ca-text-right">Saldo</th><th class="ca-text-right">Limit Harian</th><th>Aksi</th></tr></thead><tbody>' + (rows || '<tr><td colspan="7" style="text-align:center; padding:20px;">Tidak ditemukan.</td></tr>') + '</tbody></table></div>';
+
+          document.querySelectorAll("[data-detail]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var nis = btn.getAttribute("data-detail");
+              var trxs = state.transaksi.filter(function (t) { return t.nis === nis; });
+              document.getElementById("ca-modal-title").textContent = "Riwayat Mutasi NIS " + nis;
+              document.getElementById("ca-modal-body").innerHTML =
+                '<div class="ca-table-wrap"><table class="ca-table"><thead><tr><th>Waktu</th><th>Jenis</th><th class="ca-text-right">Nominal</th><th class="ca-text-right">Saldo Akhir</th></tr></thead><tbody>' +
+                (trxs.map(function (t) {
+                  return '<tr><td class="ca-mono" style="font-size:11.5px;">' + escapeHtml(t.tanggal_waktu) + '</td><td>' + escapeHtml(t.jenis_transaksi) + '</td><td class="ca-mono ca-text-right">' + formatRupiah(t.nominal) + '</td><td class="ca-mono ca-text-right">' + formatRupiah(t.saldo_akhir) + '</td></tr>';
+                }).join("") || '<tr><td colspan="4" style="text-align:center; padding:16px;">Belum ada mutasi transaksi.</td></tr>') +
+                '</tbody></table></div>';
+              document.getElementById("ca-modal").classList.remove("ca-hidden");
+            });
+          });
+        }
+        renderList("");
+        document.getElementById("ca-mutasi-search").addEventListener("input", function (e) { renderList(e.target.value); });
+      }
+
+      function renderSantriView(container) {
+        container.innerHTML =
+          '<div class="ca-module-card">' +
+            '<div class="ca-module-head">' +
+              '<div><h2>0202. Setup Data Santri &amp; Kartu RFID</h2><p>Tambah, ubah, atau blokir kartu cashless santri.</p></div>' +
+              '<div style="display:flex; gap:8px;">' +
+                '<button type="button" class="ca-btn ca-btn-emerald ca-btn-sm" id="ca-add-santri">+ Tambah Santri</button>' +
+                '<button type="button" class="ca-btn ca-btn-outline ca-btn-sm" id="ca-back-home">Kembali</button>' +
+              '</div>' +
+            '</div>' +
+            '<div class="ca-module-body">' +
+              '<input id="ca-santri-filter" class="ca-input" type="text" placeholder="Cari NIS, Nama, Kelas, atau RFID..." style="max-width:360px; margin-bottom:12px;" />' +
+              '<div id="ca-santri-table-slot"></div>' +
+            '</div>' +
+          '</div>';
+        document.getElementById("ca-back-home").addEventListener("click", function () { navigateTo("home"); });
+        document.getElementById("ca-add-santri").addEventListener("click", function () { openSantriFormModal(null); });
+
+        function renderTable(q) {
+          q = String(q || "").trim().toLowerCase();
+          var list = state.santri.filter(function (s) {
+            return !q || s.nis.toLowerCase().indexOf(q) !== -1 || s.nama_santri.toLowerCase().indexOf(q) !== -1 || s.kelas.toLowerCase().indexOf(q) !== -1 || s.rfid_uid.toLowerCase().indexOf(q) !== -1;
+          });
+          document.getElementById("ca-santri-table-slot").innerHTML =
+            '<div class="ca-table-wrap"><table class="ca-table"><thead><tr><th>NIS</th><th>RFID UID</th><th>Nama Santri</th><th>Kelas</th><th class="ca-text-right">Saldo</th><th class="ca-text-right">Limit Harian</th><th>Status</th><th>Aksi</th></tr></thead><tbody>' +
+            (list.map(function (s) {
+              var limitText = Number(s.limit_harian || 0) > 0 ? formatRupiah(s.limit_harian) : "Tanpa Limit";
+              var spentVal = Number(s.terpakai_hari_ini || 0);
+              return '<tr>' +
+                '<td class="ca-mono">' + escapeHtml(s.nis) + '</td>' +
+                '<td class="ca-mono">' + escapeHtml(s.rfid_uid || "-") + '</td>' +
+                '<td><strong>' + escapeHtml(s.nama_santri) + '</strong></td>' +
+                '<td>' + escapeHtml(s.kelas) + '</td>' +
+                '<td class="ca-mono ca-text-right">' + formatRupiah(s.saldo) + '</td>' +
+                '<td class="ca-mono ca-text-right"><strong>' + limitText + '</strong>' + (spentVal > 0 ? '<div style="font-size:11px; color:#64748b;">Terpakai: ' + formatRupiah(spentVal) + '</div>' : '') + '</td>' +
+                '<td class="' + (s.status === "aktif" ? "ca-state-ok" : "ca-state-err") + '">' + escapeHtml(s.status.toUpperCase()) + '</td>' +
+                '<td style="white-space:nowrap;">' +
+                  '<button type="button" class="ca-btn ca-btn-navy ca-btn-sm" data-limit-s="' + escapeHtml(s.nis) + '">Set Limit</button> ' +
+                  '<button type="button" class="ca-btn ca-btn-outline ca-btn-sm" data-edit-s="' + escapeHtml(s.nis) + '">Edit</button> ' +
+                  '<button type="button" class="ca-btn ca-btn-crimson ca-btn-sm" data-del-s="' + escapeHtml(s.nis) + '">Hapus</button>' +
+                '</td>' +
+              '</tr>';
+            }).join("") || '<tr><td colspan="8" style="text-align:center; padding:20px;">Belum ada data santri.</td></tr>') +
+            '</tbody></table></div>';
+
+          document.querySelectorAll("[data-limit-s]").forEach(function (b) {
+            b.addEventListener("click", function () {
+              var s = state.santri.find(function (x) { return x.nis === b.getAttribute("data-limit-s"); });
+              if (s) openDynamicLimitModal(s);
+            });
+          });
+          document.querySelectorAll("[data-edit-s]").forEach(function (b) {
+            b.addEventListener("click", function () {
+              var s = state.santri.find(function (x) { return x.nis === b.getAttribute("data-edit-s"); });
+              openSantriFormModal(s);
+            });
+          });
+          document.querySelectorAll("[data-del-s]").forEach(function (b) {
+            b.addEventListener("click", async function () {
+              var nis = b.getAttribute("data-del-s");
+              try {
+                var res = await apiPost("deleteSantri", { nis: nis, petugas: state.user.nama_petugas });
+                state.santri = res.santri;
+                showToast("Data santri dihapus.");
+                renderTable(document.getElementById("ca-santri-filter").value);
+              } catch (err) { showToast(err.message, true); }
+            });
+          });
+        }
+        renderTable("");
+        document.getElementById("ca-santri-filter").addEventListener("input", function (e) { renderTable(e.target.value); });
+      }
+
+      function openDynamicLimitModal(s) {
+        var spent = Number(s.terpakai_hari_ini || 0);
+        document.getElementById("ca-modal-title").textContent = "Set Limit Harian Dinamis";
+        document.getElementById("ca-modal-body").innerHTML =
+          '<form id="ca-limit-modal-form" style="display:flex; flex-direction:column; gap:12px;">' +
+            '<div style="background:#f8fbff; border:1px solid #bfdbfe; border-radius:8px; padding:12px;">' +
+              '<strong style="font-size:14.5px; color:#0b3b8c;">' + escapeHtml(s.nama_santri) + '</strong>' +
+              '<div style="font-size:12px; color:#475569; margin-top:2px;">NIS <span class="ca-mono">' + escapeHtml(s.nis) + '</span> &middot; Kelas ' + escapeHtml(s.kelas) + '</div>' +
+              '<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; font-size:12px;">' +
+                '<div><span style="color:#64748b; display:block;">Limit Saat Ini</span><strong class="ca-mono">' + (Number(s.limit_harian || 0) > 0 ? formatRupiah(s.limit_harian) : "Tanpa Limit") + '</strong></div>' +
+                '<div><span style="color:#64748b; display:block;">Terpakai Hari Ini</span><strong class="ca-mono">' + formatRupiah(spent) + '</strong></div>' +
+              '</div>' +
+            '</div>' +
+            '<div>' +
+              '<label class="ca-label" for="dl-limit-input">Nominal Limit Harian Baru (Rp)</label>' +
+              '<div style="display:flex; gap:6px; align-items:center;">' +
+                '<button type="button" id="dl-minus" class="ca-btn ca-btn-outline ca-btn-sm">-5rb</button>' +
+                '<input id="dl-limit-input" class="ca-input ca-mono" type="number" min="0" step="1000" value="' + Number(s.limit_harian || 0) + '" style="font-weight:700; text-align:center;" required />' +
+                '<button type="button" id="dl-plus" class="ca-btn ca-btn-outline ca-btn-sm">+5rb</button>' +
+              '</div>' +
+              '<div style="font-size:11.5px; color:#64748b; margin-top:4px;">Isi <strong>0</strong> untuk menonaktifkan batas harian (Tanpa Limit).</div>' +
+            '</div>' +
+            '<div>' +
+              '<span class="ca-label">Pilih Cepat Nominal Limit</span>' +
+              '<div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:6px;">' +
+                '<button type="button" class="ca-preset-btn" data-dl-preset="0">Tanpa Limit</button>' +
+                '<button type="button" class="ca-preset-btn" data-dl-preset="10000">Rp 10.000</button>' +
+                '<button type="button" class="ca-preset-btn" data-dl-preset="15000">Rp 15.000</button>' +
+                '<button type="button" class="ca-preset-btn" data-dl-preset="20000">Rp 20.000</button>' +
+                '<button type="button" class="ca-preset-btn" data-dl-preset="25000">Rp 25.000</button>' +
+                '<button type="button" class="ca-preset-btn" data-dl-preset="30000">Rp 30.000</button>' +
+                '<button type="button" class="ca-preset-btn" data-dl-preset="50000">Rp 50.000</button>' +
+              '</div>' +
+            '</div>' +
+            '<div id="dl-preview" style="padding:10px 12px; border-radius:8px; background:#f8fafc; border:1px solid #e2e8f0; font-size:12px;"></div>' +
+            '<div style="display:flex; gap:8px; margin-top:4px;">' +
+              '<button type="submit" id="dl-submit" class="ca-btn ca-btn-emerald" style="flex:1;">Simpan Limit Baru</button>' +
+              '<button type="button" id="dl-cancel" class="ca-btn ca-btn-outline">Batal</button>' +
+            '</div>' +
+          '</form>';
+        document.getElementById("ca-modal").classList.remove("ca-hidden");
+
+        var limitInp = document.getElementById("dl-limit-input");
+        var previewBox = document.getElementById("dl-preview");
+        function refreshPreview() {
+          var val = Math.max(0, Number(limitInp.value || 0));
+          if (val === 0) {
+            previewBox.innerHTML = 'Status: <strong class="ca-state-ok">Tanpa Batas Belanja Harian</strong>';
+          } else {
+            var sisa = Math.max(0, val - spent);
+            previewBox.innerHTML = 'Sisa limit hari ini setelah diubah: <strong class="ca-mono ' + (sisa > 0 ? "ca-state-ok" : "ca-state-warn") + '">' + formatRupiah(sisa) + '</strong>';
+          }
+        }
+        refreshPreview();
+        limitInp.addEventListener("input", refreshPreview);
+        document.getElementById("dl-minus").addEventListener("click", function () {
+          limitInp.value = String(Math.max(0, Number(limitInp.value || 0) - 5000));
+          refreshPreview();
+        });
+        document.getElementById("dl-plus").addEventListener("click", function () {
+          limitInp.value = String(Math.max(0, Number(limitInp.value || 0) + 5000));
+          refreshPreview();
+        });
+        document.querySelectorAll("[data-dl-preset]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            limitInp.value = btn.getAttribute("data-dl-preset");
+            refreshPreview();
+          });
+        });
+        document.getElementById("dl-cancel").addEventListener("click", function () {
+          document.getElementById("ca-modal").classList.add("ca-hidden");
+        });
+        document.getElementById("ca-limit-modal-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+          var btn = document.getElementById("dl-submit");
+          btn.disabled = true;
+          btn.textContent = "Menyimpan...";
+          try {
+            var newLimit = Math.max(0, Number(limitInp.value || 0));
+            var updatedSantri = {
+              nis: s.nis,
+              rfid_uid: s.rfid_uid,
+              nama_santri: s.nama_santri,
+              kelas: s.kelas,
+              saldo: Number(s.saldo || 0),
+              limit_harian: newLimit,
+              status: s.status
+            };
+            var res = await apiPost("saveSantri", { mode: "update", santri: updatedSantri, petugas: state.user.nama_petugas });
+            state.santri = (res.santri || []).map(function (item) {
+              if (item.terpakai_hari_ini == null) {
+                var prev = state.santri.find(function (p) { return p.nis === item.nis; });
+                item.terpakai_hari_ini = prev ? (prev.terpakai_hari_ini || 0) : 0;
+              }
+              return item;
+            });
+            document.getElementById("ca-modal").classList.add("ca-hidden");
+            showToast("Limit harian " + s.nama_santri + " diubah menjadi " + (newLimit > 0 ? formatRupiah(newLimit) : "Tanpa Limit") + ".");
+            renderSantriView(document.getElementById("ca-main-content"));
+          } catch (err) {
+            showToast(err.message, true);
+            btn.disabled = false;
+            btn.textContent = "Simpan Limit Baru";
+          }
+        });
+      }
+
+      function openSantriFormModal(existing) {
+        var isEdit = Boolean(existing);
+        var s = existing || { nis: "", rfid_uid: "", nama_santri: "", kelas: "", saldo: 0, limit_harian: 25000, status: "aktif" };
+        document.getElementById("ca-modal-title").textContent = isEdit ? "Ubah Data Santri" : "Tambah Santri Baru";
+        document.getElementById("ca-modal-body").innerHTML =
+          '<form id="ca-santri-modal-form" style="display:flex; flex-direction:column; gap:10px;">' +
+            '<div><label class="ca-label">NIS</label><input id="ms-nis" class="ca-input ca-mono" value="' + escapeHtml(s.nis) + '" ' + (isEdit ? "readonly" : "required") + ' /></div>' +
+            '<div><label class="ca-label">RFID UID (Tap Kartu di Sini)</label><input id="ms-rfid" class="ca-input ca-mono" value="' + escapeHtml(s.rfid_uid) + '" placeholder="Opsional / scan kartu" /></div>' +
+            '<div><label class="ca-label">Nama Santri</label><input id="ms-nama" class="ca-input" value="' + escapeHtml(s.nama_santri) + '" required /></div>' +
+            '<div><label class="ca-label">Kelas / Asrama</label><input id="ms-kelas" class="ca-input" value="' + escapeHtml(s.kelas) + '" required /></div>' +
+            '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">' +
+              '<div><label class="ca-label">Saldo (Rp)</label><input id="ms-saldo" class="ca-input ca-mono" type="number" value="' + Number(s.saldo || 0) + '" /></div>' +
+              '<div><label class="ca-label">Limit Harian (Rp)</label><input id="ms-limit" class="ca-input ca-mono" type="number" min="0" step="1000" value="' + Number(s.limit_harian || 0) + '" /></div>' +
+            '</div>' +
+            '<div style="display:flex; flex-wrap:wrap; gap:6px;">' +
+              '<button type="button" class="ca-preset-btn" style="padding:4px 10px; min-height:28px; font-size:11.5px;" data-ms-preset="0">Tanpa Limit</button>' +
+              '<button type="button" class="ca-preset-btn" style="padding:4px 10px; min-height:28px; font-size:11.5px;" data-ms-preset="15000">15rb</button>' +
+              '<button type="button" class="ca-preset-btn" style="padding:4px 10px; min-height:28px; font-size:11.5px;" data-ms-preset="20000">20rb</button>' +
+              '<button type="button" class="ca-preset-btn" style="padding:4px 10px; min-height:28px; font-size:11.5px;" data-ms-preset="25000">25rb</button>' +
+              '<button type="button" class="ca-preset-btn" style="padding:4px 10px; min-height:28px; font-size:11.5px;" data-ms-preset="30000">30rb</button>' +
+              '<button type="button" class="ca-preset-btn" style="padding:4px 10px; min-height:28px; font-size:11.5px;" data-ms-preset="50000">50rb</button>' +
+            '</div>' +
+            '<div><label class="ca-label">Status Kartu</label><select id="ms-status" class="ca-select"><option value="aktif" ' + (s.status === "aktif" ? "selected" : "") + '>Aktif</option><option value="nonaktif" ' + (s.status !== "aktif" ? "selected" : "") + '>Nonaktif / Blokir</option></select></div>' +
+            '<button type="submit" class="ca-btn ca-btn-emerald" style="margin-top:6px;">Simpan Data Santri</button>' +
+          '</form>';
+        document.getElementById("ca-modal").classList.remove("ca-hidden");
+        document.querySelectorAll("[data-ms-preset]").forEach(function (b) {
+          b.addEventListener("click", function () {
+            document.getElementById("ms-limit").value = b.getAttribute("data-ms-preset");
+          });
+        });
+        document.getElementById("ca-santri-modal-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+          try {
+            var payloadSantri = {
+              nis: document.getElementById("ms-nis").value.trim(),
+              rfid_uid: document.getElementById("ms-rfid").value.trim(),
+              nama_santri: document.getElementById("ms-nama").value.trim(),
+              kelas: document.getElementById("ms-kelas").value.trim(),
+              saldo: Number(document.getElementById("ms-saldo").value || 0),
+              limit_harian: Number(document.getElementById("ms-limit").value || 0),
+              status: document.getElementById("ms-status").value
+            };
+            var res = await apiPost("saveSantri", { mode: isEdit ? "update" : "create", santri: payloadSantri, petugas: state.user.nama_petugas });
+            state.santri = (res.santri || []).map(function (item) {
+              if (item.terpakai_hari_ini == null) {
+                var prev = state.santri.find(function (p) { return p.nis === item.nis; });
+                item.terpakai_hari_ini = prev ? (prev.terpakai_hari_ini || 0) : 0;
+              }
+              return item;
+            });
+            document.getElementById("ca-modal").classList.add("ca-hidden");
+            showToast("Data santri disimpan.");
+            renderSantriView(document.getElementById("ca-main-content"));
+          } catch (err) { showToast(err.message, true); }
+        });
+      }
+
+      function renderUsersView(container) {
+        container.innerHTML =
+          '<div class="ca-module-card">' +
+            '<div class="ca-module-head">' +
+              '<div><h2>0201. Setup Pengguna Sistem</h2><p>Kelola akun Admin dan Petugas Kasir.</p></div>' +
+              '<div style="display:flex; gap:8px;">' +
+                '<button type="button" class="ca-btn ca-btn-emerald ca-btn-sm" id="ca-add-user">+ Tambah Petugas</button>' +
+                '<button type="button" class="ca-btn ca-btn-outline ca-btn-sm" id="ca-back-home">Kembali</button>' +
+              '</div>' +
+            '</div>' +
+            '<div class="ca-module-body">' +
+              '<div class="ca-table-wrap"><table class="ca-table"><thead><tr><th>ID</th><th>Username</th><th>Nama Petugas</th><th>Role</th><th>Status</th><th>Aksi</th></tr></thead><tbody>' +
+              state.users.map(function (u) {
+                return '<tr><td class="ca-mono">' + escapeHtml(u.id) + '</td><td class="ca-mono"><strong>' + escapeHtml(u.username) + '</strong></td><td>' + escapeHtml(u.nama_petugas) + '</td><td>' + escapeHtml(u.role.toUpperCase()) + '</td><td class="' + (u.status === "aktif" ? "ca-state-ok" : "ca-state-err") + '">' + escapeHtml(u.status.toUpperCase()) + '</td><td><button type="button" class="ca-btn ca-btn-outline ca-btn-sm" data-edit-u="' + escapeHtml(u.id) + '">Edit</button></td></tr>';
+              }).join("") +
+              '</tbody></table></div>' +
+            '</div>' +
+          '</div>';
+        document.getElementById("ca-back-home").addEventListener("click", function () { navigateTo("home"); });
+        document.getElementById("ca-add-user").addEventListener("click", function () { openUserFormModal(null); });
+        container.querySelectorAll("[data-edit-u]").forEach(function (b) {
+          b.addEventListener("click", function () {
+            var u = state.users.find(function (x) { return x.id === b.getAttribute("data-edit-u"); });
+            openUserFormModal(u);
+          });
+        });
+      }
+
+      function openUserFormModal(existing) {
+        var isEdit = Boolean(existing);
+        var u = existing || { id: "", username: "", nama_petugas: "", role: "kasir", status: "aktif" };
+        document.getElementById("ca-modal-title").textContent = isEdit ? "Ubah Pengguna" : "Tambah Pengguna Baru";
+        document.getElementById("ca-modal-body").innerHTML =
+          '<form id="ca-user-modal-form" style="display:flex; flex-direction:column; gap:10px;">' +
+            '<div><label class="ca-label">Username</label><input id="mu-user" class="ca-input" value="' + escapeHtml(u.username) + '" required /></div>' +
+            '<div><label class="ca-label">Password ' + (isEdit ? "(Kosongkan jika tidak diubah)" : "") + '</label><input id="mu-pass" class="ca-input" type="password" ' + (isEdit ? "" : "required") + ' /></div>' +
+            '<div><label class="ca-label">Nama Petugas</label><input id="mu-nama" class="ca-input" value="' + escapeHtml(u.nama_petugas) + '" required /></div>' +
+            '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">' +
+              '<div><label class="ca-label">Role</label><select id="mu-role" class="ca-select"><option value="admin" ' + (u.role === "admin" ? "selected" : "") + '>Admin</option><option value="kasir" ' + (u.role === "kasir" ? "selected" : "") + '>Kasir</option></select></div>' +
+              '<div><label class="ca-label">Status</label><select id="mu-status" class="ca-select"><option value="aktif" ' + (u.status === "aktif" ? "selected" : "") + '>Aktif</option><option value="nonaktif" ' + (u.status !== "aktif" ? "selected" : "") + '>Nonaktif</option></select></div>' +
+            '</div>' +
+            '<button type="submit" class="ca-btn ca-btn-emerald" style="margin-top:6px;">Simpan Pengguna</button>' +
+          '</form>';
+        document.getElementById("ca-modal").classList.remove("ca-hidden");
+        document.getElementById("ca-user-modal-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+          try {
+            var res = await apiPost("saveUser", {
+              mode: isEdit ? "update" : "create",
+              user: {
+                id: u.id,
+                username: document.getElementById("mu-user").value.trim(),
+                password: document.getElementById("mu-pass").value.trim(),
+                nama_petugas: document.getElementById("mu-nama").value.trim(),
+                role: document.getElementById("mu-role").value,
+                status: document.getElementById("mu-status").value
+              },
+              petugas: state.user.nama_petugas
+            });
+            state.users = res.users;
+            document.getElementById("ca-modal").classList.add("ca-hidden");
+            showToast("Data pengguna disimpan.");
+            renderUsersView(document.getElementById("ca-main-content"));
+          } catch (err) { showToast(err.message, true); }
+        });
+      }
+
+      function renderLaporanView(container) {
+        container.innerHTML =
+          '<div class="ca-module-card">' +
+            '<div class="ca-module-head">' +
+              '<div><h2>0401. Laporan Transaksi Cashless</h2><p>Rekapitulasi Top Up, Belanja, dan Tarik Tunai.</p></div>' +
+              '<div style="display:flex; gap:8px;">' +
+                '<button type="button" class="ca-btn ca-btn-navy ca-btn-sm" id="ca-export-csv">Unduh CSV</button>' +
+                '<button type="button" class="ca-btn ca-btn-outline ca-btn-sm" id="ca-back-home">Kembali</button>' +
+              '</div>' +
+            '</div>' +
+            '<div class="ca-module-body">' +
+              '<div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px;">' +
+                '<select id="ca-lap-jenis" class="ca-select" style="max-width:200px;"><option value="">Semua Jenis</option><option value="Top Up">Top Up</option><option value="Belanja">Belanja</option><option value="Tarik Tunai">Tarik Tunai</option></select>' +
+                '<input id="ca-lap-search" class="ca-input" type="text" placeholder="Filter santri / petugas..." style="max-width:260px;" />' +
+              '</div>' +
+              '<div id="ca-lap-summary" class="ca-stat-row" style="margin-bottom:14px;"></div>' +
+              '<div id="ca-lap-table"></div>' +
+            '</div>' +
+          '</div>';
+
+        document.getElementById("ca-back-home").addEventListener("click", function () { navigateTo("home"); });
+
+        function getFiltered() {
+          var j = document.getElementById("ca-lap-jenis").value;
+          var q = document.getElementById("ca-lap-search").value.trim().toLowerCase();
+          return state.transaksi.filter(function (t) {
+            return (!j || t.jenis_transaksi === j) && (!q || t.nama_santri.toLowerCase().indexOf(q) !== -1 || t.nis.toLowerCase().indexOf(q) !== -1 || t.petugas.toLowerCase().indexOf(q) !== -1);
+          });
+        }
+
+        function updateReport() {
+          var list = getFiltered();
+          var sumTop = 0, sumBel = 0, sumTar = 0;
+          list.forEach(function (t) {
+            if (t.jenis_transaksi === "Top Up") sumTop += Number(t.nominal || 0);
+            else if (t.jenis_transaksi === "Belanja") sumBel += Number(t.nominal || 0);
+            else if (t.jenis_transaksi === "Tarik Tunai") sumTar += Number(t.nominal || 0);
+          });
+          document.getElementById("ca-lap-summary").innerHTML =
+            '<div class="ca-stat-cell"><span>Total Top Up</span><strong class="ca-mono ca-state-ok">' + formatRupiah(sumTop) + '</strong></div>' +
+            '<div class="ca-stat-cell"><span>Total Belanja</span><strong class="ca-mono ca-state-err">' + formatRupiah(sumBel) + '</strong></div>' +
+            '<div class="ca-stat-cell"><span>Total Tarik Tunai</span><strong class="ca-mono ca-state-warn">' + formatRupiah(sumTar) + '</strong></div>';
+
+          document.getElementById("ca-lap-table").innerHTML =
+            '<div class="ca-table-wrap"><table class="ca-table"><thead><tr><th>ID Transaksi</th><th>Waktu</th><th>NIS</th><th>Nama Santri</th><th>Jenis</th><th class="ca-text-right">Nominal</th><th class="ca-text-right">Saldo Akhir</th><th>Petugas</th></tr></thead><tbody>' +
+            (list.map(function (t) {
+              return '<tr><td class="ca-mono" style="font-size:11.5px;">' + escapeHtml(t.id_transaksi) + '</td><td class="ca-mono" style="font-size:11.5px;">' + escapeHtml(t.tanggal_waktu) + '</td><td class="ca-mono">' + escapeHtml(t.nis) + '</td><td>' + escapeHtml(t.nama_santri) + '</td><td>' + escapeHtml(t.jenis_transaksi) + '</td><td class="ca-mono ca-text-right">' + formatRupiah(t.nominal) + '</td><td class="ca-mono ca-text-right">' + formatRupiah(t.saldo_akhir) + '</td><td>' + escapeHtml(t.petugas) + '</td></tr>';
+            }).join("") || '<tr><td colspan="8" style="text-align:center; padding:20px;">Tidak ada data transaksi.</td></tr>') +
+            '</tbody></table></div>';
+        }
+        updateReport();
+        document.getElementById("ca-lap-jenis").addEventListener("change", updateReport);
+        document.getElementById("ca-lap-search").addEventListener("input", updateReport);
+        document.getElementById("ca-export-csv").addEventListener("click", function () {
+          var list = getFiltered();
+          var csv = "id_transaksi,tanggal_waktu,nis,nama_santri,jenis_transaksi,nominal,saldo_akhir,petugas,keterangan\n" +
+            list.map(function (t) {
+              return [t.id_transaksi, t.tanggal_waktu, t.nis, '"' + t.nama_santri + '"', t.jenis_transaksi, t.nominal, t.saldo_akhir, '"' + t.petugas + '"', '"' + t.keterangan + '"'].join(",");
+            }).join("\n");
+          var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "laporan-cashless-lembaga-" + getTodayPrefix() + ".csv";
+          a.click();
+        });
+      }
+
+      function renderLogsView(container) {
+        container.innerHTML =
+          '<div class="ca-module-card">' +
+            '<div class="ca-module-head">' +
+              '<div><h2>0211. Log Aktivitas Sistem</h2><p>Riwayat login dan perubahan data terakhir.</p></div>' +
+              '<button type="button" class="ca-btn ca-btn-outline ca-btn-sm" id="ca-back-home">Kembali</button>' +
+            '</div>' +
+            '<div class="ca-module-body">' +
+              '<div class="ca-table-wrap"><table class="ca-table"><thead><tr><th>Waktu</th><th>Pengguna</th><th>Aksi</th><th>Detail</th></tr></thead><tbody>' +
+              (state.logs.map(function (l) {
+                return '<tr><td class="ca-mono" style="font-size:11.5px;">' + escapeHtml(l.waktu) + '</td><td><strong>' + escapeHtml(l.pengguna) + '</strong></td><td class="ca-mono">' + escapeHtml(l.aksi) + '</td><td>' + escapeHtml(l.detail) + '</td></tr>';
+              }).join("") || '<tr><td colspan="4" style="text-align:center; padding:18px;">Belum ada log sistem.</td></tr>') +
+              '</tbody></table></div>' +
+            '</div>' +
+          '</div>';
+        document.getElementById("ca-back-home").addEventListener("click", function () { navigateTo("home"); });
+      }
+
+      function renderInstitutionSettingsView(container) {
+        var draft = Object.assign({}, DEFAULT_SETTINGS, state.settings || {});
+
+        container.innerHTML =
+          '<div class="ca-module-card">' +
+            '<div class="ca-module-head">' +
+              '<div><h2>0204. Pengaturan Identitas &amp; Logo Lembaga</h2><p>Unggah logo sendiri serta ubah nama, alamat, kontak, dan keterangan struk.</p></div>' +
+              '<button type="button" class="ca-btn ca-btn-outline ca-btn-sm" id="ca-back-home">Kembali</button>' +
+            '</div>' +
+            '<form id="ca-inst-form" class="ca-module-body" style="display:flex; flex-direction:column; gap:18px;">' +
+              '<div style="border:1px solid #e2e8f0; border-radius:10px; padding:16px; background:#f8fafc; display:flex; flex-wrap:wrap; align-items:center; gap:16px;">' +
+                '<div id="ca-inst-logo-preview">' + renderLogoHtml(88, draft.logo_url, draft.nama_lembaga) + '</div>' +
+                '<div style="flex:1; min-width:240px; display:flex; flex-direction:column; gap:8px;">' +
+                  '<strong style="font-size:14px;">Logo Lembaga</strong>' +
+                  '<span style="font-size:12px; color:#475569;">Pilih gambar logo (PNG, JPG, WebP, atau SVG). Gambar otomatis dikompres agar dapat disimpan di Google Sheets.</span>' +
+                  '<div style="display:flex; flex-wrap:wrap; gap:8px;">' +
+                    '<input type="file" id="ca-inst-logo-file" accept="image/png,image/jpeg,image/webp,image/svg+xml" style="display:none;" />' +
+                    '<label for="ca-inst-logo-file" class="ca-btn ca-btn-navy ca-btn-sm" style="cursor:pointer;">Upload Logo dari Perangkat</label>' +
+                    '<button type="button" id="ca-inst-logo-clear" class="ca-btn ca-btn-outline ca-btn-sm" style="color:#b91c1c; border-color:#fca5a5;' + (draft.logo_url ? '' : 'display:none;') + '">Hapus Logo</button>' +
+                  '</div>' +
+                  '<div>' +
+                    '<label class="ca-label" for="ca-inst-logo-url" style="font-size:11.5px; margin-bottom:4px;">Atau tempel URL Gambar Logo (Opsional)</label>' +
+                    '<input id="ca-inst-logo-url" class="ca-input ca-mono" type="text" value="' + escapeHtml(draft.logo_url && draft.logo_url.indexOf("data:") === 0 ? "" : (draft.logo_url || "")) + '" placeholder="' + (draft.logo_url && draft.logo_url.indexOf("data:") === 0 ? "Logo terpasang dari file upload (isi URL baru jika ingin mengganti)" : "https://contoh.com/logo-lembaga.png") + '" style="font-size:12px;" />' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+              '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:14px;">' +
+                '<div><label class="ca-label" for="ca-inst-nama">Nama Lembaga / Pondok / Sekolah *</label><input id="ca-inst-nama" class="ca-input" type="text" value="' + escapeHtml(draft.nama_lembaga) + '" required /></div>' +
+                '<div><label class="ca-label" for="ca-inst-subjudul">Subjudul / Nama Aplikasi</label><input id="ca-inst-subjudul" class="ca-input" type="text" value="' + escapeHtml(draft.subjudul_aplikasi) + '" /></div>' +
+                '<div><label class="ca-label" for="ca-inst-kota">Lokasi Singkat / Kota / Kecamatan</label><input id="ca-inst-kota" class="ca-input" type="text" value="' + escapeHtml(draft.kota) + '" /></div>' +
+                '<div><label class="ca-label" for="ca-inst-unit">Nama Unit Kasir / Koperasi (Struk)</label><input id="ca-inst-unit" class="ca-input" type="text" value="' + escapeHtml(draft.nama_unit) + '" /></div>' +
+                '<div style="grid-column:1 / -1;"><label class="ca-label" for="ca-inst-alamat">Alamat Lengkap Lembaga</label><input id="ca-inst-alamat" class="ca-input" type="text" value="' + escapeHtml(draft.alamat) + '" /></div>' +
+                '<div><label class="ca-label" for="ca-inst-telp">No. Telepon / WhatsApp Lembaga</label><input id="ca-inst-telp" class="ca-input ca-mono" type="text" value="' + escapeHtml(draft.telepon) + '" /></div>' +
+                '<div><label class="ca-label" for="ca-inst-web">Website / Email Lembaga</label><input id="ca-inst-web" class="ca-input" type="text" value="' + escapeHtml(draft.email_website) + '" /></div>' +
+                '<div style="grid-column:1 / -1;"><label class="ca-label" for="ca-inst-footer">Catatan Kaki Struk Thermal</label><input id="ca-inst-footer" class="ca-input" type="text" value="' + escapeHtml(draft.footer_struk) + '" /></div>' +
+              '</div>' +
+              '<div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; border-top:1px solid #e2e8f0; padding-top:14px;">' +
+                '<button type="button" id="ca-inst-reset" class="ca-btn ca-btn-outline">Reset Standar</button>' +
+                '<button type="submit" id="ca-inst-save" class="ca-btn ca-btn-emerald">Simpan Pengaturan Lembaga</button>' +
+              '</div>' +
+            '</form>' +
+          '</div>';
+
+        document.getElementById("ca-back-home").addEventListener("click", function () { navigateTo("home"); });
+
+        var previewEl = document.getElementById("ca-inst-logo-preview");
+        var clearBtn = document.getElementById("ca-inst-logo-clear");
+        var logoUrlInp = document.getElementById("ca-inst-logo-url");
+        var namaInp = document.getElementById("ca-inst-nama");
+
+        function refreshPreview() {
+          previewEl.innerHTML = renderLogoHtml(88, draft.logo_url, namaInp.value.trim() || "Lembaga");
+          clearBtn.style.display = draft.logo_url ? "inline-flex" : "none";
+        }
+
+        namaInp.addEventListener("input", refreshPreview);
+
+        document.getElementById("ca-inst-logo-file").addEventListener("change", async function (e) {
+          var file = e.target.files && e.target.files[0];
+          if (!file) return;
+          try {
+            var dataUrl = await compressLogoFile(file);
+            draft.logo_url = dataUrl;
+            logoUrlInp.value = "";
+            logoUrlInp.placeholder = "Logo terpasang dari file upload (isi URL baru jika ingin mengganti)";
+            refreshPreview();
+            showToast("Logo dimuat. Klik Simpan Pengaturan Lembaga untuk menyimpan.");
+          } catch (err) {
+            showToast(err.message || "Gagal memproses gambar logo.", true);
+          }
+          e.target.value = "";
+        });
+
+        logoUrlInp.addEventListener("input", function () {
+          var v = logoUrlInp.value.trim();
+          if (v) {
+            draft.logo_url = v;
+            refreshPreview();
+          } else if (draft.logo_url && draft.logo_url.indexOf("data:") !== 0) {
+            draft.logo_url = "";
+            refreshPreview();
+          }
+        });
+
+        clearBtn.addEventListener("click", function () {
+          draft.logo_url = "";
+          logoUrlInp.value = "";
+          logoUrlInp.placeholder = "https://contoh.com/logo-lembaga.png";
+          refreshPreview();
+        });
+
+        document.getElementById("ca-inst-reset").addEventListener("click", function () {
+          draft = Object.assign({}, DEFAULT_SETTINGS, { logo_url: "" });
+          document.getElementById("ca-inst-nama").value = draft.nama_lembaga;
+          document.getElementById("ca-inst-subjudul").value = draft.subjudul_aplikasi;
+          document.getElementById("ca-inst-kota").value = draft.kota;
+          document.getElementById("ca-inst-unit").value = draft.nama_unit;
+          document.getElementById("ca-inst-alamat").value = draft.alamat;
+          document.getElementById("ca-inst-telp").value = draft.telepon;
+          document.getElementById("ca-inst-web").value = draft.email_website;
+          document.getElementById("ca-inst-footer").value = draft.footer_struk;
+          logoUrlInp.value = "";
+          refreshPreview();
+        });
+
+        document.getElementById("ca-inst-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+          var btn = document.getElementById("ca-inst-save");
+          btn.disabled = true;
+          btn.textContent = "Menyimpan...";
+          try {
+            var nextSettings = {
+              nama_lembaga: document.getElementById("ca-inst-nama").value.trim() || DEFAULT_SETTINGS.nama_lembaga,
+              subjudul_aplikasi: document.getElementById("ca-inst-subjudul").value.trim() || DEFAULT_SETTINGS.subjudul_aplikasi,
+              kota: document.getElementById("ca-inst-kota").value.trim(),
+              nama_unit: document.getElementById("ca-inst-unit").value.trim(),
+              alamat: document.getElementById("ca-inst-alamat").value.trim(),
+              telepon: document.getElementById("ca-inst-telp").value.trim(),
+              email_website: document.getElementById("ca-inst-web").value.trim(),
+              footer_struk: document.getElementById("ca-inst-footer").value.trim() || DEFAULT_SETTINGS.footer_struk,
+              logo_url: draft.logo_url || ""
+            };
+            var res = await apiPost("saveSettings", {
+              settings: nextSettings,
+              petugas: state.user ? state.user.nama_petugas : "Admin"
+            });
+            state.settings = saveStoredSettings(res.settings || nextSettings);
+            applyInstitutionBranding();
+            showToast("Identitas & logo lembaga berhasil disimpan!");
+          } catch (err) {
+            showToast(err.message || "Gagal menyimpan pengaturan lembaga.", true);
+          } finally {
+            btn.disabled = false;
+            btn.textContent = "Simpan Pengaturan Lembaga";
+          }
+        });
+      }
+
+      function renderSettingsView(container) {
+        container.innerHTML =
+          '<div class="ca-module-card">' +
+            '<div class="ca-module-head">' +
+              '<div><h2>0205. Setup Koneksi Google Sheets API</h2><p>Atur endpoint Google Apps Script Web App (/exec).</p></div>' +
+              '<button type="button" class="ca-btn ca-btn-outline ca-btn-sm" id="ca-back-home">Kembali</button>' +
+            '</div>' +
+            '<div class="ca-module-body" style="max-width:620px;">' +
+              '<label class="ca-label" for="ca-set-gas-url">URL Web App Google Apps Script</label>' +
+              '<input id="ca-set-gas-url" class="ca-input ca-mono" type="url" value="' + escapeHtml(state.gasUrl) + '" placeholder="https://script.google.com/macros/s/.../exec" />' +
+              '<div style="display:flex; gap:10px; margin-top:12px;">' +
+                '<button type="button" id="ca-set-save" class="ca-btn ca-btn-navy">Simpan &amp; Sinkronisasi</button>' +
+                '<button type="button" id="ca-set-demo" class="ca-btn ca-btn-outline">Kembali ke Mode Demo</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        document.getElementById("ca-back-home").addEventListener("click", function () { navigateTo("home"); });
+        document.getElementById("ca-set-save").addEventListener("click", async function () {
+          var url = document.getElementById("ca-set-gas-url").value.trim();
+          if (!url) return showToast("URL tidak boleh kosong.", true);
+          state.gasUrl = url;
+          localStorage.setItem(STORAGE_KEYS.GAS_URL, url);
+          await syncBootstrapData();
+          updateConnLabels();
+          showToast("Terhubung ke Google Sheets & data tersinkron.");
+        });
+        document.getElementById("ca-set-demo").addEventListener("click", async function () {
+          state.gasUrl = "";
+          localStorage.removeItem(STORAGE_KEYS.GAS_URL);
+          await syncBootstrapData();
+          updateConnLabels();
+          showToast("Menggunakan Mode Demo Lokal.");
+        });
+      }
+
+      document.getElementById("ca-modal-close").addEventListener("click", function () {
+        document.getElementById("ca-modal").classList.add("ca-hidden");
+      });
+
+      // Sinkronkan identitas & logo lembaga dari Google Sheets jika GAS URL sudah terpasang
+      if (state.gasUrl) {
+        apiPost("getSettings", {}).then(function (res) {
+          if (res && res.settings) {
+            state.settings = saveStoredSettings(res.settings);
+            applyInstitutionBranding();
+            if (state.user && state.activeView === "home") renderCurrentView();
+          }
+        }).catch(function () {});
+      }
+
+      // Restore session jika ada di sessionStorage
+      var savedSession = sessionStorage.getItem(STORAGE_KEYS.SESSION);
+      if (savedSession) {
+        try {
+          state.user = JSON.parse(savedSession);
+          if (state.user && state.user.username) {
+            enterDashboard();
+          }
+        } catch (e) {}
+      }
+    })();
+  </script>
+</div>
